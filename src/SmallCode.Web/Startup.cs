@@ -6,24 +6,74 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using SmallCode.Web.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 namespace SmallCode.Web
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+
+        public Startup(IHostingEnvironment env)
         {
+            var builder = new ConfigurationBuilder()
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+
+            if (env.IsDevelopment())
+            {
+            }
+
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public IConfigurationRoot Configuration { get; }
+
+        public void ConfigureServices(IServiceCollection services)
         {
-            app.Run(async (context) =>
+            services.AddDbContext<SMContext>(option => option.UseNpgsql(Configuration.GetConnectionString("PostgreSql")));
+
+            services.AddMvc();
+            services.AddSession();
+            services.AddAuthentication(options => options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+
+            //csrf
+            services.AddAntiforgery();
+        }
+
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
+            app.UseExceptionHandler("/Home/Error");
+
+            app.UseStaticFiles();
+
+            app.UseSession();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                await context.Response.WriteAsync("Hello World!");
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                LoginPath = new PathString("/Account/Login"),
+                AuthenticationScheme = CookieAuthenticationDefaults.AuthenticationScheme,
+
             });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                   template: "{controller=Home}/{action=Index}/{id?}");
+            }
+          );
+            await SampleData.InitDB(app.ApplicationServices);
         }
     }
 }

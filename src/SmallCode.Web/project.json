@@ -5,6 +5,10 @@
       "type": "platform"
     },
     "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Razor.Tools": {
+      "version": "1.0.0-preview1-final",
+      "type": "build"
+    },
     "Microsoft.AspNetCore.StaticFiles": "1.0.0-rc2-final",
     "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0-rc2-release1",
     "Microsoft.EntityFrameworkCore.Tools": {
@@ -20,7 +24,9 @@
     "Microsoft.Extensions.DependencyInjection": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final"
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final"
   },
 
   "tools": {
