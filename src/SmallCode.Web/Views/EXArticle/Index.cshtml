@@ -1,0 +1,59 @@
+﻿@using SmallCode.Web.Models.ViewModels;
+@model SmallCode.Pager.PagedList<EXArticleViewModel>
+@using SmallCode.Pager;
+
+@{
+            ViewBag.Title = "博客";
+}
+<link href="~/styles/page.css" rel="stylesheet" />
+<div class="container top-0-8">
+    <div class="row">
+        <div class="col-md-9">
+            @foreach (var item in Model.PageListData)
+            {
+                <article class="blog-post">
+                    <div class="post-head">
+                        <h1 class="post-title"><a href="/EXArticle/Show/@item.Id" target="_blank">@item.Title</a></h1>
+                        <div class="post-meta">
+                            <span class="author">作者：<a href="/User/Show/1">@item.CreateUserName</a></span> •
+                            <time class="post-date" datetime="@item.CreateDate" title="@item.CreateDate">@item.CreateDate</time> •
+                            <span class="browser">访问量：@item.Browses</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        @item.Summary
+                    </div>
+                    <div class="post-permalink">
+                        <a href="/EXArticle/Show/@item.Id" class="btn btn-success" target="_blank">阅读全文</a>
+                    </div>
+                    <footer class="post-footer clearfix">
+                        <div class="pull-left tag-list">
+                            <i class="glyphicon glyphicon-folder-open"></i>
+                            <a href="?Category=z-Coding&amp;Date=">@item.Category</a>
+                        </div>
+                        <div class="pull-right share">
+                        </div>
+                    </footer>
+                </article>
+            }
+            @Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { pageIndex }))
+        </div>
+        <aside class="col-md-3">
+            <div class="blog-widget">
+                <h4 class="title">最近热门<a href="/Blog/Index?Date=" class="pull-right">{100}</a></h4>
+                <div class="content tag-cloud">
+                    <a class="list-group-item" href="/Blog/Index?Category=z-Coding&amp;Date=">z-Coding</a>
+                    <a class="list-group-item" href="/Blog/Index?Category=Python&amp;Date=">Python</a>
+                    <a class="list-group-item" href="/Blog/Index?Category=Markdown&amp;Date=">Markdown</a>
+                    <a class="list-group-item" href="/Blog/Index?Category=Java&amp;Date=">Java</a>
+                    <a class="list-group-item" href="/Blog/Index?Category=生活感悟&amp;Date=">生活感悟</a>
+                    <a class="list-group-item" href="/Blog/Index?Category=Hdfs&amp;Date=">Hdfs</a>
+                    <a class="list-group-item" href="/Blog/Index?Category=MapReduce&amp;Date=">MapReduce</a>
+                    <a class="list-group-item" href="/Blog/Index?Category=.Net&amp;Date=">.Net</a>
+                    <a class="list-group-item" href="/Blog/Index?Category=大数据&amp;Date=">大数据</a>
+                    <a class="list-group-item" href="/Blog/Index?Category=Hadoop&amp;Date=">Hadoop</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>

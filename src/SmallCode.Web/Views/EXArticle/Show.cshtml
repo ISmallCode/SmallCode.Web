@@ -1,0 +1,33 @@
+﻿
+@model SmallCode.Web.Models.ViewModels.EXArticleViewModel
+@using CommonMark
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="container top-0-8">
+    <article class="blog-post">
+        <div class="post-head">
+            <h1 class="post-title"><a href="/EXArticle/Show/@Model.Id" target="_blank">@Model.Title</a></h1>
+            <div class="post-meta">
+                <span class="author">作者：<a href="/User/Show/@Model.CreateBy">@Model.CreateUserName</a></span> •
+                <time class="post-date" datetime="@Model.CreateDate" title="@Model.CreateDate">@Model.CreateDate</time> •
+                <span class="browser">访问量：@Model.Browses</span>
+            </div>
+        </div>
+        <div class="post-content">
+            @Html.Raw(Model.Description)
+        </div>
+        <div class="post-permalink">
+            <a href="/EXArticle/Show/@Model.Id" class="btn btn-success" target="_blank">阅读全文</a>
+        </div>
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <i class="glyphicon glyphicon-folder-open"></i>
+                <a href="?Category=z-Coding&amp;Date=">z-Coding</a>
+            </div>
+            <div class="pull-right share">
+            </div>
+        </footer>
+    </article>
+</div>

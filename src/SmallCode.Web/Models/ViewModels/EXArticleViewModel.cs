@@ -76,6 +76,26 @@ namespace SmallCode.Web.Models.ViewModels
 
         }
 
+        public EXArticleViewModel(EXArticle model)
+        {
+            this.Id = model.Id;
+            this.AuthorId = model.AuthorId;
+            this.Browses = model.Browses;
+            this.CategoryId = model.CategoryId;
+            this.Category = model.Category.Description;
+            this.CreateBy = model.CreateBy;
+            this.CreateDate = model.CreateDate;
+            this.CreateUserName = model.CreateUser.UserName;
+            this.Description = model.Description;
+            this.IsDelete = model.IsDelete;
+            this.Label = model.Label;
+            this.OldBrowses = model.OldBrowses;
+            this.ReplyCount = model.ReplyCount;
+            this.Source = model.Source;
+            this.TempId = model.TempId;
+            this.Title = model.Title;
+            this.URL = model.URL;
+        }
 
     }
 }
