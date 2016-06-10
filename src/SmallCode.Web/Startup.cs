@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using SmallCode.Web.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using SmallCode.Web.Services;
 
 namespace SmallCode.Web
 {
@@ -44,6 +45,10 @@ namespace SmallCode.Web
 
             //csrf
             services.AddAntiforgery();
+
+            ///注入services
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMaterialsService, MaterialsService>();
         }
 
         public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -71,6 +76,8 @@ namespace SmallCode.Web
                 routes.MapRoute(
                     name: "default",
                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             }
           );
             await SampleData.InitDB(app.ApplicationServices);

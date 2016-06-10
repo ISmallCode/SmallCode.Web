@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "用户注册";
+}
+
+<h2>用户注册</h2>
+<form action="/Account/Register" method="post" id="registerForm">
+    @Html.AntiForgeryToken()
+    <div style="margin:0 auto; width:400px;">
+        <div class="form-group">
+            <label> Email：</label>
+            <input type="text" name="email" id="txtEmail" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label> 用户名：</label>
+            <input type="text" name="Username" id="txtRegisterUsername" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label> 密  码：</label>
+            <input type="password" name="Password" id="txtRegisterPassword" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label> 密码重复：</label>
+            <input type="password" name="Confirm" id="txtConfirm" class="form-control" />
+        </div>
+        <button type="submit" id="btnRegister" class="btn btn-primary">注册</button>
+        <button type="reset" class="btn btn-default" id="btnRegister">重置</button>
+    </div>
+</form>

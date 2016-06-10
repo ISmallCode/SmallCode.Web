@@ -1,0 +1,118 @@
+﻿
+@{
+}
+
+@*<marquee><font size="3" color=red>Hello, World</font></marquee>*@
+
+<script src="~/scripts/jquery.signalr-2.2.0.js"></script>
+<script src="/signalr/hubs"></script>
+<script>
+    $(function () {
+        var hubProxy = $.connection.sMHub;
+
+        hubProxy.client.Send = function (type, message) {
+            if (type == "info") {
+                var str = '<li class="news-item">{0}<a href="{1}">查看全部</a>{2}</li>';
+                var dateStr = $.formatDate("yyyy-MM-dd hh:mm:ss", new Date(message.CreateDate)); //转换时间
+                str = $.format(str, message.Title, message.Url, dateStr);
+                $(".infoData").prepend(str);
+            }
+            else if (type == "user") {
+                var str = '<li class="news-item">{0}<a href="{1}">查看全部</a>{2}</li>';
+                var dateStr = $.formatDate("yyyy-MM-dd hh:mm:ss", new Date(message.CreateDate)); //转换时间
+                str = $.format(str, message.Title, message.Url, dateStr);
+                $(".userData").prepend(str);
+            }
+        }
+
+        $.connection.hub.start().done(function () {
+
+        });
+
+        $("#btnTest").click(function () {
+            hubProxy.server.send("222", "222", "222");
+            console.log(hubProxy.server);
+        });
+    });
+</script>
+<div class="container top-0-8">
+    <div class="row">
+        <div class="col-md-8">
+            这里是主体
+            <button id="btnTest">SignalR</button>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-list-alt"></span><b>资料最新动态</b>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul class="infoData">
+                                @foreach (var item in ViewBag.Infoes)
+                                {
+                                    <li class="news-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    动态是实时更新的
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-list-alt"></span><b>用户最新动态</b>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul class="userData">
+                                @foreach (var item in ViewBag.Users)
+                                {
+                                    <li class="news-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    用户动态是实时更新的
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/scripts/jquery.bootstrap.newsbox.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        $(".infoData").bootstrapNews({
+            newsPerPage: 4,
+            autoplay: true,
+            pauseOnHover: true,
+            navigation: false,
+            direction: 'down',
+            newsTickerInterval: 2500,
+            onToDo: function () {
+                //console.log(this);
+            }
+        });
+
+
+        $(".userData").bootstrapNews({
+            newsPerPage: 4,
+            autoplay: true,
+            pauseOnHover: true,
+            navigation: false,
+            direction: 'down',
+            newsTickerInterval: 2500,
+            onToDo: function () {
+                //console.log(this);
+            }
+        });
+
+    });
+</script>
