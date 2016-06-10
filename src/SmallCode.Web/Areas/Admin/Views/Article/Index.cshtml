@@ -1,0 +1,67 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using SmallCode.Web.Models.ViewModels
+@model SmallCode.Pager.PagedList<ArticleViewModel>
+@using SmallCode.Pager
+@{
+    Layout = "~/Areas/Admin/Views/shared/_LayoutPart.cshtml";
+}
+<link href="~/styles/page.css" rel="stylesheet" />
+<div class="gray-bg wrapper wrapper-content animated fadeInUp">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>所有博客</h5>
+                    <div class="ibox-tools">
+                        <a href="/Admin/Article/Edit" class="btn btn-primary btn-xs">创建新博客</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-1">
+                            <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> 刷新</button>
+                        </div>
+                        <div class="col-md-11">
+                            <div class="input-group">
+                                <input type="text" placeholder="请输入分类名称" class="input-sm form-control"> <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-primary">搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>名称</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                @foreach (var item in Model.PageListData)
+                                {
+                                    <tr id="@item.Id">
+                                        <td>@item.Id</td>
+                                        <td>@item.Title</td>
+                                        <td>@item.CreateDate</td>
+                                        <td>
+                                            <a class="link-update" href="/Admin/Article/Show/@item.Id">预览</a>
+                                            <a class="link-update" href="/Admin/Article/Edit/@item.Id">修改</a>
+                                            <a href="#" del-url="/Admin/Article/Delete/@item.Id" class="dataDel" data-id="@item.Id">删除</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -13,5 +13,6 @@ namespace SmallCode.Web.Models
         public string Title { set; get; }
 
         public string Description { set; get; }
+ 
     }
 }

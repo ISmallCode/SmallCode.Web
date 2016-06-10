@@ -39,5 +39,8 @@ namespace SmallCode.Web.Models
         /// 浏览量
         /// </summary>
         public int Browses { set; get; }
+
+
+        public virtual MaterialsCategory Category { set; get; }
     }
 }

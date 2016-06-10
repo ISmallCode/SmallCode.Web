@@ -42,12 +42,12 @@ namespace SmallCode.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string Username, string Password)
         {
-            JsonResult<object> model = new JsonResult<object>();
+            ReturnResult<object> model = new ReturnResult<object>();
 
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
-                model.Message = "用户名或者密码不能为空";
-                model.Status = ResultStatus.OK;
+                model.ReturnMsg = "用户名或者密码不能为空";
+                model.Status = "ok";
             }
             else
             {
@@ -60,13 +60,13 @@ namespace SmallCode.Web.Controllers
                     await HttpContext.Authentication.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                               new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
 
-                    model.Message = "登录成功";
-                    model.Status = ResultStatus.OK;
+                    model.ReturnMsg = "登录成功";
+                    model.Status = "ok";
                 }
                 else
                 {
-                    model.Message = "登录失败";
-                    model.Status = ResultStatus.Error;
+                    model.ReturnMsg = "登录失败";
+                    model.Status = "error";
                 }
             }
             return Json(model);
@@ -103,11 +103,11 @@ namespace SmallCode.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(string Username, string Password, string Email)
         {
-            JsonResult<object> model = new JsonResult<object>();
+            ReturnResult<object> model = new ReturnResult<object>();
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Email))
             {
-                model.Status = ResultStatus.OK;
-                model.Message = "输入的信息不能为空";
+                model.Status = "ok";
+                model.ReturnMsg = "输入的信息不能为空";
             }
             User user = new User();
             user.Email = Email;
@@ -116,7 +116,7 @@ namespace SmallCode.Web.Controllers
 
             await userService.Save(user);
 
-            model.Status = ResultStatus.OK;
+            model.Status = "ok";
             model.Message = "注册成功";
             return Json(model);
         }

@@ -16,5 +16,7 @@ namespace SmallCode.Web.Models
         /// 标题
         /// </summary>
         public int Label { set; get; }
+
+ 
     }
 }

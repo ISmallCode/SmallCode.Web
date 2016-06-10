@@ -12,5 +12,6 @@ namespace SmallCode.Web.Models
         public string Description { set; get; }
 
         public Guid? FatherId { set; get; }
+ 
     }
 }

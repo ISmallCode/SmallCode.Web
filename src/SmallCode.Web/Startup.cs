@@ -12,6 +12,7 @@ using SmallCode.Web.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SmallCode.Web.Services;
+using SmallCode.Web.Services.Impl;
 
 namespace SmallCode.Web
 {
@@ -49,6 +50,14 @@ namespace SmallCode.Web
             ///注入services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMaterialsService, MaterialsService>();
+            services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<IArticleCategoryService, ArticleCategoryService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IEXArticleAuthorService, EXArticleAuthorService>();
+            services.AddScoped<IEXArticleService, EXArticleService>();
+            services.AddScoped<IEXArticleTempService, EXArticleTempService>();
+            services.AddScoped<IMaterialsCategoryService, MaterialsCategoryService>();
+            services.AddScoped<IProgrammingService, ProgrammingService>();
         }
 
         public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

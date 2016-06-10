@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,6 +44,7 @@ namespace SmallCode.Web.Models
         /// <summary>
         /// 分类
         /// </summary>
+        [ForeignKey("Category")]
         public Guid CategoryId { set; get; }
 
         /// <summary>
@@ -63,6 +65,9 @@ namespace SmallCode.Web.Models
         /// <summary>
         /// 作者ID
         /// </summary>
-        public int? AuthorId { set; get; }
+        public Guid? AuthorId { set; get; }
+
+
+        public virtual Category Category { set; get; }
     }
 }

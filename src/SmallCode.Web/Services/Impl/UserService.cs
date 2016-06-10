@@ -6,7 +6,7 @@ using SmallCode.Web.Models;
 using SmallCode.Web.Filters;
 using SmallCode.Web.Extensions;
 
-namespace SmallCode.Web.Services
+namespace SmallCode.Web.Services.Impl
 {
     public class UserService : BaseService, IUserService
     {

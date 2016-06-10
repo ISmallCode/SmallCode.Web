@@ -54,10 +54,11 @@
         // Use Ajax to submit form data
         $.post("/Account/Login", $form.serialize(), function (data) {
             console.log(data)
-            if (data.Status == "ok") {
+            console.log(typeof (data.Status));
+            if (data.Status == "0") {
                 window.location.href = "/Home/Index";
             }
-            else if (data.Status == "error") {
+            else if (data.Status == "1") {
                 //  $("#warning").html(data.Message);
                 alert(data.Message);
             }
@@ -145,10 +146,10 @@
         // Use Ajax to submit form data
         $.post("/Account/Register", $form.serialize(), function (data) {
             console.log(data)
-            if (data.Status == "ok") {
+            if (data.Status == "0") {
                 window.location.href = "/Home/Index";
             }
-            else if (data.Status == "error") {
+            else if (data.Status == "1") {
                 //$("#warning").html(data.Message);
                 alert(data.Message);
             }

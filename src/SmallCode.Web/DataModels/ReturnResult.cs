@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 
 namespace SmallCode.Web.DataModels
 {
-    public class JsonResult<T>
+    public class ReturnResult<T>
     {
         //状态  ok error
-        public ResultStatus Status { set; get; }
+        public string Status { set; get; }
 
         //消息
         public string Message { set; get; }
 
         //返回结果
         public T Result { set; get; }
-    }
 
-    public enum ResultStatus { OK, Error }
+        public string ReturnMsg { set; get; }
+    }
 }

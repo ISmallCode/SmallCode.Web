@@ -1,0 +1,68 @@
+﻿@using SmallCode.App.ViewModel
+@model SmallCode.Models.WebViewModel<MaterialsCategoryViewModel>
+@using SmallCode.Pager
+@{
+    Layout = "~/Areas/Admin/Views/shared/_LayoutPart.cshtml";
+}
+<link href="~/styles/page.css" rel="stylesheet" />
+<div class="gray-bg wrapper wrapper-content animated fadeInUp">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>所有资料类型</h5>
+                    <div class="ibox-tools">
+                        <a href="/Admin/Materials/CategoryEdit" class="btn btn-primary btn-xs">创建新资料类型</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-1">
+                            <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> 刷新</button>
+                        </div>
+                        <div class="col-md-11">
+                            <form>
+                                <div class="input-group">
+                                    <input type="text" placeholder="请输入资料类型名称" class="input-sm form-control" name="Title" value="@Model.Parameters["Title"]">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary">搜索</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>标题</th>
+                                    <th>编程</th>
+                                    <th>创建者</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                @foreach (var item in Model.PagedList.PageListData)
+                                {
+                                    <tr id="@item.Id">
+                                        <td>@item.Title</td>
+                                        <td>@item.Programming</td>
+                                        <td>@item.CreateUserName</td>
+                                        <td>@item.CreateDate</td>
+                                        <td>
+                                            <a class="link-update" href="/Admin/Materials/CategoryEdit/@item.Id">修改</a>
+                                            <a href="#" del-url="/Admin/Materials/DeleteCategory/@item.Id" class="dataDel" data-id="@item.Id">删除</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        @Html.PagedListPager(Model.PagedList, page => Url.Action("Index?Title=" + @Model.Parameters["Title"], new { page }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -27,7 +27,9 @@
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final"
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
+    "SmallCode.Pager.RC2": "1.0.0-rc2-1",
+    "CommonMark.NET": "0.12.0"
   },
 
   "tools": {

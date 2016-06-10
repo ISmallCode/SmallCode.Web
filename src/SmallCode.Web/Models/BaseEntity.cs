@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,6 +22,7 @@ namespace SmallCode.Web.Models
         /// <summary>
         /// 创建者
         /// </summary>
+        [ForeignKey("CreateUser")]
         public Guid CreateBy { set; get; }
 
         /// <summary>
@@ -37,5 +39,7 @@ namespace SmallCode.Web.Models
         ///  修改日期
         /// </summary>
         public DateTime? ModifyDate { set; get; }
+
+        public virtual User CreateUser { set; get; }
     }
 }

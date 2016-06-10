@@ -19,5 +19,7 @@ namespace SmallCode.Web.Models
         /// 分类描述
         /// </summary>
         public string Description { set; get; }
+
+        public virtual User CreateUser { set; get; }
     }
 }
