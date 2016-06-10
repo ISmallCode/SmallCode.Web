@@ -65,7 +65,7 @@ namespace SmallCode.Web.Areas.Admin.Controllers
 
             if (programmingService.IsSuccess)
             {
-                return RedirectToAction("Index");
+                return Redirect("/Admin/Programming/Index");
             }
             else
             {

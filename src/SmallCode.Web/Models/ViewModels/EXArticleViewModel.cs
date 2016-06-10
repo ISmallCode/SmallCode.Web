@@ -63,7 +63,7 @@ namespace SmallCode.Web.Models.ViewModels
         /// <summary>
         /// 作者ID
         /// </summary>
-        public int? AuthorId { set; get; }
+        public Guid? AuthorId { set; get; }
 
 
         /// <summary>
@@ -76,6 +76,6 @@ namespace SmallCode.Web.Models.ViewModels
 
         }
 
-     
+
     }
 }

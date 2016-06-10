@@ -185,7 +185,7 @@ namespace SmallCode.Web.Areas.Admin.Controllers
 
             if (materialsService.IsSuccess)
             {
-                return RedirectToAction("CategoryManage");
+                return Redirect("/Admin/Materials/CategoryManage");
             }
             else
             {
