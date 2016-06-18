@@ -13,7 +13,7 @@ namespace SmallCode.Web.Controllers
     {
         public User CurrentUser { set; get; }
 
-        public SMContext db { get { return HttpContext.RequestServices.GetService<SMContext>(); } }
+        public SCContext db { get { return HttpContext.RequestServices.GetService<SCContext>(); } }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {

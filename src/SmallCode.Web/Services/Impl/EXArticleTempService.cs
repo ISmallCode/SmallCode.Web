@@ -11,9 +11,9 @@ namespace SmallCode.Web.Services.Impl
     public class EXArticleTempService : BaseService, IEXArticleTempService
     {
 
-        private readonly SMContext db;
+        private readonly SCContext db;
 
-        public EXArticleTempService(SMContext _context)
+        public EXArticleTempService(SCContext _context)
         {
             db = _context;
         }

@@ -9,11 +9,9 @@ using SmallCode.Web.Models;
 using SmallCode.Web.Models.ViewModels;
 using SmallCode.Pager;
 
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace SmallCode.Web.Controllers
 {
-    public class EXArticleController : Controller
+    public class EXArticleController : BaseController
     {
 
         [Inject]

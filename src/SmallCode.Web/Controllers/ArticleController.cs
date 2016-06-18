@@ -13,7 +13,7 @@ using SmallCode.Web.Models;
 
 namespace SmallCode.Web.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticleController : BaseController
     {
 
         [Inject]

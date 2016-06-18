@@ -11,9 +11,9 @@ namespace SmallCode.Web.Services.Impl
     public class EXArticleAuthorService : BaseService, IEXArticleAuthorService
     {
 
-        private readonly SMContext db;
+        private readonly SCContext db;
 
-        public EXArticleAuthorService(SMContext _context)
+        public EXArticleAuthorService(SCContext _context)
         {
             db = _context;
         }

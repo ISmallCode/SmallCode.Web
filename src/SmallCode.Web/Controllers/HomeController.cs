@@ -8,7 +8,6 @@ using SmallCode.Web.Services;
 using SmallCode.Web.Filters;
 using SmallCode.Web.Models;
 
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SmallCode.Web.Controllers
 {

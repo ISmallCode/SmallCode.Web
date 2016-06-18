@@ -38,7 +38,7 @@ namespace SmallCode.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SMContext>(option => option.UseNpgsql(Configuration.GetConnectionString("PostgreSql")));
+            services.AddDbContext<SCContext>(option => option.UseNpgsql(Configuration.GetConnectionString("PostgreSql")));
 
             services.AddMvc();
             services.AddSession();

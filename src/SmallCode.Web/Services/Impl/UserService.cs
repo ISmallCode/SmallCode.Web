@@ -11,9 +11,9 @@ namespace SmallCode.Web.Services.Impl
     public class UserService : BaseService, IUserService
     {
 
-        private readonly SMContext db;
+        private readonly SCContext db;
 
-        public UserService(SMContext _context)
+        public UserService(SCContext _context)
         {
             db = _context;
         }

@@ -10,9 +10,9 @@ namespace SmallCode.Web.Services.Impl
 {
     public class ProgrammingService : BaseService, IProgrammingService
     {
-        private readonly SMContext db;
+        private readonly SCContext db;
 
-        public ProgrammingService(SMContext _context)
+        public ProgrammingService(SCContext _context)
         {
             db = _context;
         }

@@ -11,7 +11,7 @@ namespace SmallCode.Web.Models
     {
         public async static Task InitDB(IServiceProvider service)
         {
-            var db = service.GetService<SMContext>();
+            var db = service.GetService<SCContext>();
             var userService = service.GetService<IUserService>();
 
             if (db.Database != null && db.Database.EnsureCreated())

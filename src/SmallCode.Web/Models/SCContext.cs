@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SmallCode.Web.Models
 {
-    public class SMContext : DbContext
+    public class SCContext : DbContext
     {
-        public SMContext(DbContextOptions option) : base(option)
+        public SCContext(DbContextOptions option) : base(option)
         {
         }
 

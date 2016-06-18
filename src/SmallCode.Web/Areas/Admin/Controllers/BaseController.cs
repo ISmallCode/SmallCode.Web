@@ -18,7 +18,7 @@ namespace SmallCode.Web.Areas.Admin.Controllers
 
         public IDictionary<string, object> Parameters { set; get; }
 
-        public SMContext DB { get { return HttpContext.RequestServices.GetService<SMContext>(); } }
+        public SCContext DB { get { return HttpContext.RequestServices.GetService<SCContext>(); } }
 
         public override void OnActionExecuting(ActionExecutingContext context)
 

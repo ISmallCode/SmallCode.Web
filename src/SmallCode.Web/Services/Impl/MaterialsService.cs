@@ -14,9 +14,9 @@ namespace SmallCode.Web.Services.Impl
     public class MaterialsService : BaseService, IMaterialsService
     {
 
-        private readonly SMContext db;
+        private readonly SCContext db;
 
-        public MaterialsService(SMContext _context)
+        public MaterialsService(SCContext _context)
         {
             db = _context;
         }

@@ -9,8 +9,11 @@ using SmallCode.Web.Models.ViewModels;
 
 namespace SmallCode.Web.Controllers
 {
-    public class AskController : Controller
+    public class AskController : BaseController
     {
-       
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }

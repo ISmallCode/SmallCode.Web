@@ -12,9 +12,9 @@ namespace SmallCode.Web.Services.Impl
 {
     public class ArticleService : BaseService, IArticleService
     {
-        private readonly SMContext db;
+        private readonly SCContext db;
 
-        public ArticleService(SMContext _context)
+        public ArticleService(SCContext _context)
         {
             db = _context;
         }
