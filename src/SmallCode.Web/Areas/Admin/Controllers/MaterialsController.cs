@@ -10,6 +10,10 @@ using SmallCode.Web.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SmallCode.Web.Services;
 using SmallCode.Web.Filters;
+using Microsoft.Extensions.DependencyInjection;
+using SmallCode.Web.Hubs;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
+using Microsoft.AspNetCore.SignalR;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -95,12 +99,10 @@ namespace SmallCode.Web.Areas.Admin.Controllers
                 dModel.Url = "/Materials/Show" + Materials.Id;
                 dModel.Id = Materials.Id;
 
-                ///将更新发到全部的客户端  这里用到了DI  signalr的支持 rc2 
-                //TODO
-                ///https://github.com/aspnet/SignalR-Server/issues/121
-               //  IConnectionManager conn = Resolver.GetService<ConnectionManager>();
-                //IHubContext context = conn.GetHubContext<SMHub>();
-                //context.Clients.All.Send("info", dModel);
+                ///将更新发到全部的客户端  这里用到了DI
+                IConnectionManager conn = HttpContext.RequestServices.GetService<ConnectionManager>();
+                IHubContext context = conn.GetHubContext<SMHub>();
+                context.Clients.All.Send("info", dModel);
             }
             else
             {

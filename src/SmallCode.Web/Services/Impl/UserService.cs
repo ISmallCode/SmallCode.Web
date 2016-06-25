@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using SmallCode.Web.Models;
 using SmallCode.Web.Filters;
 using SmallCode.Web.Extensions;
+using SmallCode.Pager;
+using Microsoft.EntityFrameworkCore;
 
 namespace SmallCode.Web.Services.Impl
 {
@@ -25,6 +27,22 @@ namespace SmallCode.Web.Services.Impl
         public List<User> GetLatest10()
         {
             return db.Users.OrderByDescending(x => x.CreatedDate).Take(10).ToList();
+        }
+
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        public PagedList<User> GetUserByPage(string userName, int pageIndex, int pageSize)
+        {
+            IQueryable<User> query = db.Users.AsNoTracking().AsQueryable();
+            if (!string.IsNullOrEmpty(userName))
+            {
+                query = query.Where(x => x.UserName.Contains(userName));
+            }
+            return query.ToPagedList(pageIndex, pageSize);
         }
 
         /// <summary>
@@ -62,6 +80,19 @@ namespace SmallCode.Web.Services.Impl
         }
 
         /// <summary>
+        ///  删除用户
+        /// </summary>
+        /// <param name="id"></param>
+        public void Remove(Guid id)
+        {
+            User user = db.Users.FirstOrDefault(x => x.Id == id);
+            db.Users.Remove(user);
+            bool result = db.SaveChanges() > 0;
+            base.IsSuccess = result;
+            base.ReturnMsg = result ? "删除成功" : "删除失败";
+        }
+
+        /// <summary>
         /// 保存
         /// </summary>
         /// <param name="user"></param>
@@ -74,5 +105,8 @@ namespace SmallCode.Web.Services.Impl
             db.Users.Add(user);
             await db.SaveChangesAsync();
         }
+
+
+
     }
 }

@@ -9,7 +9,7 @@
 <script>
     $(function () {
         var hubProxy = $.connection.sMHub;
-
+        console.log($.connection);
         hubProxy.client.Send = function (type, message) {
             if (type == "info") {
                 var str = '<li class="news-item">{0}<a href="{1}">查看全部</a>{2}</li>';
