@@ -15,5 +15,6 @@ namespace SmallCode.Web.Services
         void Save(Article article);
         void Update(Article article);
         void Remove(Guid id);
+        List<Article> GetLatest10();
     }
 }

@@ -65,6 +65,89 @@
     border-bottom: 1px dotted #555;
 }
 
+.text-muted {
+    color: #777;
+}
+
+.widget {
+    position: relative;
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    background-color: #fff;
+    list-style: none;
+}
+
+    .widget h3 {
+        margin: 0;
+        padding: 11px 15px 10px;
+        border-bottom: 1px solid #eaeaea;
+        background-color: #fbfbfb;
+        color: #666;
+        font-size: 18px;
+    }
+
+.excerpt {
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+
+    .excerpt:hover, .excerpt-one:hover, .excerpt-four:hover {
+        background-color: #E8ECEF;
+    }
+
+    .excerpt header {
+        margin: 0 0 10px 0;
+    }
+
+    .excerpt h2 {
+        position: relative;
+        top: 1px;
+        display: inline;
+        margin: 0;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 25px;
+    }
+
+    .excerpt .cat {
+        position: relative;
+        top: -2px;
+        display: inline-block;
+        margin-right: 6px;
+        padding: 6px;
+        background-color: #45BCF9;
+        color: #fff;
+        font-size: 12px;
+    }
+
+    .excerpt .focus {
+        float: right;
+        margin-top: -15px;
+        padding-left: 10px;
+    }
+
+    .excerpt span.note {
+        display: block;
+        overflow: hidden;
+        color: #999;
+        font-size: 14px;
+        line-height: 20px;
+        max-height: 120px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .excerpt .text-muted {
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
 
 .blog-post {
     padding: 35px;

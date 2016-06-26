@@ -7,6 +7,7 @@ using SmallCode.Web.DataModels;
 using SmallCode.Web.Services;
 using SmallCode.Web.Filters;
 using SmallCode.Web.Models;
+using SmallCode.Web.Extensions;
 
 
 namespace SmallCode.Web.Controllers
@@ -19,25 +20,52 @@ namespace SmallCode.Web.Controllers
         [Inject]
         public IUserService userService { set; get; }
 
+        [Inject]
+        public IArticleService articleService { set; get; }
+
 
         public IActionResult Index()
         {
 
+            List<HomeInfoModel> homeInfoes = new List<HomeInfoModel>();
+            List<Article> articles = new List<Article>();
             List<Materials> materialses = new List<Materials>();
             List<User> users = new List<User>();
             materialses = materialsService.GetLatest10();
             users = userService.GetLatest10();
 
+
+
+
             //动态消息
             List<DynamicModel> infoes = new List<DynamicModel>();
+            articles = articleService.GetLatest10();
+            foreach (var item in articles)
+            {
+                HomeInfoModel homeInfo = new HomeInfoModel();
+                homeInfo.Title = item.Title;
+                homeInfo.Description = item.Description.SubString(100, "......");
+                homeInfo.CreateDate = item.CreateDate;
+                homeInfo.Category = "原创文章";
+
+                homeInfoes.Add(homeInfo);
+            }
             foreach (var item in materialses)
             {
                 DynamicModel model = new DynamicModel();
+                HomeInfoModel homeInfo = new HomeInfoModel();
                 infoes.Add(model);
+                homeInfoes.Add(homeInfo);
+
                 model.Title = item.Title;
                 model.Id = item.Id;
                 model.CreateDate = item.CreateDate;
                 model.Url = "/Materials/Show/" + item.Id;
+
+                homeInfo.Title = item.Title;
+                homeInfo.Description = item.Description.SubString(100, "......");
+                homeInfo.CreateDate = item.CreateDate;
+                homeInfo.Category = "学习资料";
             }
 
             //动态用户信息
@@ -54,6 +82,9 @@ namespace SmallCode.Web.Controllers
 
             ViewBag.Infoes = infoes;
             ViewBag.Users = userList;
+            ViewBag.HomeInfoes = homeInfoes.OrderByDescending(x=>x.CreateDate).ToList();
+
+
 
             return View();
         }

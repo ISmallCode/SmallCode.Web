@@ -25,6 +25,11 @@ namespace SmallCode.Web.Services.Impl
             return db.Articles.Where(x => x.Id == id).Include(x => x.Category).FirstOrDefault();
         }
 
+        public List<Article> GetLatest10()
+        {
+            return db.Articles.OrderByDescending(x => x.CreateDate).Take(10).ToList();
+        }
+
         public PagedList<ArticleViewModel> GetListByPage(string title, int pageIndex, int pageSize)
         {
             IQueryable<ArticleViewModel> query =

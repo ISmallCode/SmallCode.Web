@@ -31,6 +31,7 @@ namespace SmallCode.Web.Models.ViewModels
 
         public MaterialsViewModel(Materials model)
         {
+            this.Title = model.Title;
             this.Summary = model.Description.SubString(100, "......");
             this.Description = model.Description;
             this.CategoryId = model.CategoryId;
