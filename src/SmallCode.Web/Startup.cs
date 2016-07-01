@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SmallCode.Web.Services;
 using SmallCode.Web.Services.Impl;
-using Microsoft.AspNetCore.SignalR.Infrastructure;
+//using Microsoft.AspNetCore.SignalR.Infrastructure;
 
 namespace SmallCode.Web
 {
@@ -48,11 +48,11 @@ namespace SmallCode.Web
             //csrf
             services.AddAntiforgery();
             services.AddCors();
-            services.AddSignalR(options =>
-            {
-                options.Hubs.EnableDetailedErrors = true;
-            });
-            services.AddSingleton<ConnectionManager>();
+            //services.AddSignalR(options =>
+            //{
+            //    options.Hubs.EnableDetailedErrors = true;
+            //});
+            //services.AddSingleton<ConnectionManager>();
 
             ///注入services
             services.AddScoped<IUserService, UserService>();
@@ -77,7 +77,7 @@ namespace SmallCode.Web
             app.UseStaticFiles();
 
             app.UseSession();
-            app.UseSignalR();
+           // app.UseSignalR();
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AutomaticAuthenticate = true,
