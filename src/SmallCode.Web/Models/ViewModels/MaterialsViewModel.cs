@@ -1,6 +1,9 @@
 ﻿using SmallCode.Web.Extensions;
+using SmallCode.Web.Schemas;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +18,7 @@ namespace SmallCode.Web.Models.ViewModels
 
         public string Summary { set; get; }
 
+        [Display(Name = "资料类型")]
         public MaterialsType MaterialsType { set; get; }
 
         public Guid CategoryId { set; get; }
@@ -25,6 +29,7 @@ namespace SmallCode.Web.Models.ViewModels
 
         public int Browses { set; get; }
 
+        [Display(Name = "资料来源")]
         public SourceType SourceType { set; get; }
 
         public MaterialsViewModel() { }

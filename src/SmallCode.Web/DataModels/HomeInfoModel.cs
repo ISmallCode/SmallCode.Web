@@ -16,5 +16,9 @@ namespace SmallCode.Web.DataModels
         public DateTime CreateDate { set; get; }
 
         public string Category { set; get; }
+
+        public int Browses { set; get; }
+
+        public string Url { set; get; }
     }
 }

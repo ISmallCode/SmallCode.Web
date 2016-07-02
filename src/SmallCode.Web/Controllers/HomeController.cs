@@ -47,7 +47,8 @@ namespace SmallCode.Web.Controllers
                 homeInfo.Description = item.Description.SubString(100, "......");
                 homeInfo.CreateDate = item.CreateDate;
                 homeInfo.Category = "原创文章";
-
+                homeInfo.Browses = item.Browses;
+                homeInfo.Url = "/Article/Show/" + item.Id;
                 homeInfoes.Add(homeInfo);
             }
             foreach (var item in materialses)
@@ -66,6 +67,8 @@ namespace SmallCode.Web.Controllers
                 homeInfo.Description = item.Description.SubString(100, "......");
                 homeInfo.CreateDate = item.CreateDate;
                 homeInfo.Category = "学习资料";
+                homeInfo.Browses = item.Browses;
+                homeInfo.Url = "/Materials/Show/" + item.Id;
             }
 
             //动态用户信息
@@ -82,7 +85,7 @@ namespace SmallCode.Web.Controllers
 
             ViewBag.Infoes = infoes;
             ViewBag.Users = userList;
-            ViewBag.HomeInfoes = homeInfoes.OrderByDescending(x=>x.CreateDate).ToList();
+            ViewBag.HomeInfoes = homeInfoes.OrderByDescending(x => x.CreateDate).ToList();
 
 
 
