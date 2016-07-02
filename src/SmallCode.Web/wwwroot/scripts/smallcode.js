@@ -54,13 +54,13 @@
         // Use Ajax to submit form data
         $.post("/Account/Login", $form.serialize(), function (data) {
             console.log(data)
-            console.log(typeof (data.Status));
-            if (data.Status == "ok") {
+            console.log(data.status);
+            if (data.status == "ok") {
                 window.location.href = "/Home/Index";
             }
-            else if (data.Status == "error") {
+            else if (data.status == "error") {
                 //  $("#warning").html(data.Message);
-                alert(data.Message);
+                alert(data.message);
             }
             else {
                 //   $("#warning").html("未知错误！");

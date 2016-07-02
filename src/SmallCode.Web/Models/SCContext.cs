@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Npgsql.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace SmallCode.Web.Models
 {
@@ -54,6 +56,7 @@ namespace SmallCode.Web.Models
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.HasPostgresExtension("uuid-ossp");
             base.OnModelCreating(builder);
         }
 
