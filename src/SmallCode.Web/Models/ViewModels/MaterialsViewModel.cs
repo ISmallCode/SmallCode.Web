@@ -29,6 +29,7 @@ namespace SmallCode.Web.Models.ViewModels
 
         public int Browses { set; get; }
 
+        [Display(Name = "资料来源")]
         public SourceType SourceType { set; get; }
 
         public MaterialsViewModel() { }

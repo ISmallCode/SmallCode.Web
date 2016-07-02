@@ -7,8 +7,11 @@ namespace SmallCode.Web.DataModels
 {
     public class DropDownModel
     {
+        public string Id { set; get; }
+
         public string Key { set; get; }
 
         public string Value { set; get; }
+
     }
 }

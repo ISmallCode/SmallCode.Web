@@ -54,8 +54,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">来源类型</label>
                             <div class="col-sm-10">
-                                @Html.DropDownListFor(m => m.SourceType, (IEnumerable<SelectListItem>)ViewData["SourceTypeList"], new { @class = "form-control", @id = "txtSourceType" })
-                                <span class="help-block m-b-none">帮助文本，可能会超过一行，以块级元素显示</span>
+                                @Html.EnumToDropDownListFor(m => m.SourceType, new { @class = "form-control", @id = "txtSourceType" })
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

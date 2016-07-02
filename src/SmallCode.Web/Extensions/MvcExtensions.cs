@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using Microsoft.AspNetCore.Routing;
+using SmallCode.Web.DataModels;
 using SmallCode.Web.Schemas;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace SmallCode.Web.Extensions
 
             var selectList = new List<SelectListItem>();
             Type type = typeof(TModel);
-          
+
             PropertyInfo propInfo = type.GetProperty(modelExplorer.Metadata.PropertyName);
             if (propInfo != null)
             {
@@ -88,7 +89,6 @@ namespace SmallCode.Web.Extensions
             }
             return helper.DropDownList(name, selectList);
         }
-
 
         /// <summary>
         /// 图片展示扩展
