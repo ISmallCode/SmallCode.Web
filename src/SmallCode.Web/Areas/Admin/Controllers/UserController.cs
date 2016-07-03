@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using SmallCode.Web.Models;
 using SmallCode.Pager;
 using SmallCode.Web.DataModels;
-//using Microsoft.AspNetCore.SignalR.Infrastructure;
-//using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
+using Microsoft.AspNetCore.SignalR;
 using SmallCode.Web.Hubs;
 using Microsoft.Extensions.DependencyInjection;
 using SmallCode.Web.Filters;
@@ -15,7 +15,7 @@ using SmallCode.Web.Services;
 
 namespace SmallCode.Web.Areas.Admin.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         [Inject]
         public IUserService userService { set; get; }
@@ -55,9 +55,9 @@ namespace SmallCode.Web.Areas.Admin.Controllers
             dModel.Id = user.Id;
 
             ///将更新发到全部的客户端  这里用到了DI
-            //IConnectionManager conn = HttpContext.RequestServices.GetService<ConnectionManager>();
-            //IHubContext context = conn.GetHubContext<SMHub>();
-            //context.Clients.All.Send("user", dModel);
+            IConnectionManager conn = HttpContext.RequestServices.GetService<ConnectionManager>();
+            IHubContext context = conn.GetHubContext<SMHub>();
+            context.Clients.All.Send("user", dModel);
             return View();
         }
 

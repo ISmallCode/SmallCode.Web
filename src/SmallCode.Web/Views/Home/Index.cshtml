@@ -9,8 +9,13 @@
 <script>
     $(function () {
         var hubProxy = $.connection.sMHub;
-        console.log($.connection);
+
+        $.connection.hub.start(null, function () {
+            console.log("start");
+        });
+
         hubProxy.client.Send = function (type, message) {
+            console.log(message);
             if (type == "info") {
                 var str = '<li class="news-item">{0}<a href="{1}">查看全部</a>{2}</li>';
                 var dateStr = $.formatDate("yyyy-MM-dd hh:mm:ss", new Date(message.CreateDate)); //转换时间
@@ -25,9 +30,7 @@
             }
         }
 
-        $.connection.hub.start().done(function () {
 
-        });
 
         $("#btnTest").click(function () {
             hubProxy.server.send("222", "222", "222");

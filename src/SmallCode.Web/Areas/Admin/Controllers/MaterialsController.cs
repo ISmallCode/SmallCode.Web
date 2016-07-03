@@ -12,8 +12,9 @@ using SmallCode.Web.Services;
 using SmallCode.Web.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using SmallCode.Web.Hubs;
-//using Microsoft.AspNetCore.SignalR.Infrastructure;
-//using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -101,9 +102,10 @@ namespace SmallCode.Web.Areas.Admin.Controllers
                 dModel.Id = Materials.Id;
 
                 ///将更新发到全部的客户端  这里用到了DI
-                //IConnectionManager conn = HttpContext.RequestServices.GetService<ConnectionManager>();
-                //IHubContext context = conn.GetHubContext<SMHub>();
-                // context.Clients.All.Send("info", dModel);
+                IConnectionManager conn = HttpContext.RequestServices.GetService<ConnectionManager>();
+                IHubContext context = conn.GetHubContext<SMHub>();
+                context.Clients.All.Send("info", dModel);
+
             }
             else
             {
