@@ -34,6 +34,7 @@ namespace SmallCode.Web.Models.ViewModels
             this.CreateDate = model.CreateDate;
             this.IsDelete = model.IsDelete;
             this.Category = model.Category.Description;
+            this.CreateUserName = model.CreateUser.UserName;
         }
 
     }

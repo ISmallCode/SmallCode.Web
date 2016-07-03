@@ -44,6 +44,8 @@ namespace SmallCode.Web.Models.ViewModels
             this.Source = model.Source;
             this.SourceType = model.SourceType;
             this.Browses = model.Browses;
+            this.CreateDate = model.CreateDate;
+            this.CreateUserName = model.CreateUser.UserName;
         }
 
     }
