@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SmallCode.Pager;
+using SmallCode.Web.Models.ViewModels;
 
 namespace SmallCode.Web.Services.Impl
 {
-    public class AskService : BaseService, IBaseService
+    public class AskService : BaseService, IAskService
     {
         private readonly SCContext db;
 
@@ -14,5 +16,11 @@ namespace SmallCode.Web.Services.Impl
         {
             db = _context;
         }
+
+        public PagedList<TopicViewModel> GetListByPage(string title, int pageIndex, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
