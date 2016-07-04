@@ -54,6 +54,12 @@ namespace SmallCode.Web.Models
         /// </summary>
         public DbSet<ArticleReply> ArticleReplies { set; get; }
 
+        public DbSet<Topic> Topices { set; get; }
+
+        public DbSet<TopicNode> TopicNodes { set; get; }
+
+        public DbSet<TopicReply> TopicReplies { set; get; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.HasPostgresExtension("uuid-ossp");

@@ -4,20 +4,46 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SmallCode.Web.Models.ViewModels;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using SmallCode.Web.Services;
+using SmallCode.Web.Filters;
+using SmallCode.Web.Models;
+using SmallCode.Pager;
 
 namespace SmallCode.Web.Controllers
 {
     public class AskController : BaseController
     {
-        public IActionResult Index()
+        [Inject]
+        public IAskService askService { set; get; }
+
+        public IActionResult Index(int pageIndex = 1, int pageSize = 10)
         {
-            return View();
+            PagedList<TopicViewModel> list = askService.GetTopicListByPage("", pageIndex, pageSize);
+            return View(list);
         }
 
         public IActionResult Show()
         {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Publish()
+        {
+            ViewBag.Nodes = askService.GetAllNodes();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Publish(Topic model)
+        {
+            model.UserId = CurrentUser.Id;
+            askService.SaveTopic(model);
+            if (askService.IsSuccess)
+            {
+                return Redirect("/Ask/Index");
+            }
             return View();
         }
     }

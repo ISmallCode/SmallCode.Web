@@ -11,7 +11,6 @@ namespace SmallCode.Web.Models.ViewModels
 
         public Guid? ParentId { get; set; }
 
-        public string NodeName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

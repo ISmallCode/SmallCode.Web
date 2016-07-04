@@ -12,9 +12,10 @@ namespace SmallCode.Web.Models
 
         public Guid? ParentId { get; set; }
 
-        public string NodeName { get; set; }
         public string Name { get; set; }
+
         public string Description { get; set; }
+
         public int Order { get; set; }
 
         public DateTime CreateDate { get; set; }

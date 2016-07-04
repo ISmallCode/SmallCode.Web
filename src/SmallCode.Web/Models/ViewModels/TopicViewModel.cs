@@ -66,6 +66,7 @@ namespace SmallCode.Web.Models.ViewModels
         /// </summary>
         public string NodeName { set; get; }
 
+        public TopicViewModel() { }
 
         public TopicViewModel(Topic model)
         {
@@ -82,7 +83,7 @@ namespace SmallCode.Web.Models.ViewModels
             this.LastReplyDate = model.LastReplyDate;
             this.CreateDate = model.CreateDate;
             this.UserName = model.User.UserName;
-            this.NodeName = model.Node.NodeName;
+            this.NodeName = model.Node.Name;
         }
     }
 }
