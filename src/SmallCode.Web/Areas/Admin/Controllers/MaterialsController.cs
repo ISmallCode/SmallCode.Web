@@ -12,8 +12,9 @@ using SmallCode.Web.Services;
 using SmallCode.Web.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using SmallCode.Web.Hubs;
-using Microsoft.AspNetCore.SignalR.Infrastructure;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,29 +37,30 @@ namespace SmallCode.Web.Areas.Admin.Controllers
         public IActionResult Edit(Guid? Id)
         {
             List<MaterialsCategory> categories = materialsService.GetAllMaterialsCategories();
-            List<SelectListItem> CategoryList = new List<SelectListItem>();
-            CategoryList.Add(new SelectListItem { Value = "", Text = "分类" });
-            foreach (var item in categories)
-            {
-                CategoryList.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Title });
-            }
-            ViewData["CategoryList"] = CategoryList;
+            ViewData["CategoryList"] = categories.Select(x => new SelectListItem { Text = x.Title, Value = x.Id.ToString() });
+            //List<SelectListItem> CategoryList = new List<SelectListItem>();
+            //CategoryList.Add(new SelectListItem { Value = "", Text = "分类" });
+            //foreach (var item in categories)
+            //{
+            //    CategoryList.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Title });
+            //}
+            //ViewData["CategoryList"] = CategoryList;
 
 
-            List<SelectListItem> MaterialsTypeList = new List<SelectListItem>();
-            MaterialsTypeList.Add(new SelectListItem { Value = "", Text = "资料类型" });
-            MaterialsTypeList.Add(new SelectListItem { Value = "0", Text = "视屏" });
-            MaterialsTypeList.Add(new SelectListItem { Value = "1", Text = "电子书" });
-            MaterialsTypeList.Add(new SelectListItem { Value = "2", Text = "文档资料" });
-            MaterialsTypeList.Add(new SelectListItem { Value = "3", Text = "博客" });
-            MaterialsTypeList.Add(new SelectListItem { Value = "4", Text = "项目" });
-            ViewData["MaterialsTypeList"] = MaterialsTypeList;
+            //List<SelectListItem> MaterialsTypeList = new List<SelectListItem>();
+            //MaterialsTypeList.Add(new SelectListItem { Value = "", Text = "资料类型" });
+            //MaterialsTypeList.Add(new SelectListItem { Value = "0", Text = "视屏" });
+            //MaterialsTypeList.Add(new SelectListItem { Value = "1", Text = "电子书" });
+            //MaterialsTypeList.Add(new SelectListItem { Value = "2", Text = "文档资料" });
+            //MaterialsTypeList.Add(new SelectListItem { Value = "3", Text = "博客" });
+            //MaterialsTypeList.Add(new SelectListItem { Value = "4", Text = "项目" });
+            //ViewData["MaterialsTypeList"] = MaterialsTypeList;
 
-            List<SelectListItem> SourceTypeList = new List<SelectListItem>();
-            SourceTypeList.Add(new SelectListItem { Value = "", Text = "来源类型" });
-            SourceTypeList.Add(new SelectListItem { Value = "0", Text = "原创" });
-            SourceTypeList.Add(new SelectListItem { Value = "1", Text = "转载" });
-            ViewData["SourceTypeList"] = SourceTypeList;
+            //List<SelectListItem> SourceTypeList = new List<SelectListItem>();
+            //SourceTypeList.Add(new SelectListItem { Value = "", Text = "来源类型" });
+            //SourceTypeList.Add(new SelectListItem { Value = "0", Text = "原创" });
+            //SourceTypeList.Add(new SelectListItem { Value = "1", Text = "转载" });
+            //ViewData["SourceTypeList"] = SourceTypeList;
 
             MaterialsViewModel model = null;
 
@@ -103,6 +105,7 @@ namespace SmallCode.Web.Areas.Admin.Controllers
                 IConnectionManager conn = HttpContext.RequestServices.GetService<ConnectionManager>();
                 IHubContext context = conn.GetHubContext<SMHub>();
                 context.Clients.All.Send("info", dModel);
+
             }
             else
             {
@@ -112,7 +115,7 @@ namespace SmallCode.Web.Areas.Admin.Controllers
 
             if (materialsService.IsSuccess)
             {
-                return Redirect("/Admin/ArticleMaterials/Index");
+                return Redirect("/Admin/Materials/Index");
             }
             else
             {

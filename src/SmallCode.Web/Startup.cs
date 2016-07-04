@@ -48,10 +48,11 @@ namespace SmallCode.Web
             //csrf
             services.AddAntiforgery();
             services.AddCors();
-            services.AddSignalR(options =>
-            {
-                options.Hubs.EnableDetailedErrors = true;
-            });
+            services.AddSignalR();
+            //services.AddSignalR(options =>
+            //{
+            //    options.Hubs.EnableDetailedErrors = true;
+            //});
             services.AddSingleton<ConnectionManager>();
 
             ///注入services

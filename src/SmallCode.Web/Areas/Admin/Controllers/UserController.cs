@@ -15,7 +15,7 @@ using SmallCode.Web.Services;
 
 namespace SmallCode.Web.Areas.Admin.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         [Inject]
         public IUserService userService { set; get; }

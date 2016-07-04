@@ -8,7 +8,7 @@ using SmallCode.Web.Services;
 using SmallCode.Web.Filters;
 using SmallCode.Web.Models;
 using SmallCode.Web.Extensions;
-
+using CommonMark;
 
 namespace SmallCode.Web.Controllers
 {
@@ -42,13 +42,17 @@ namespace SmallCode.Web.Controllers
             articles = articleService.GetLatest10();
             foreach (var item in articles)
             {
+                string[] imageUrls = CommonMarkConverter.Convert(item.Description).GetHtmlImageUrlList();
                 HomeInfoModel homeInfo = new HomeInfoModel();
                 homeInfo.Title = item.Title;
                 homeInfo.Description = item.Description.SubString(100, "......");
                 homeInfo.CreateDate = item.CreateDate;
                 homeInfo.Category = "原创文章";
-
+                homeInfo.Browses = item.Browses;
+                homeInfo.Url = "/Article/Show/" + item.Id;
+                homeInfo.ImageUrl = imageUrls.Count() > 0 ? imageUrls[0] : null;
                 homeInfoes.Add(homeInfo);
+
             }
             foreach (var item in materialses)
             {
@@ -66,6 +70,8 @@ namespace SmallCode.Web.Controllers
                 homeInfo.Description = item.Description.SubString(100, "......");
                 homeInfo.CreateDate = item.CreateDate;
                 homeInfo.Category = "学习资料";
+                homeInfo.Browses = item.Browses;
+                homeInfo.Url = "/Materials/Show/" + item.Id;
             }
 
             //动态用户信息
@@ -82,7 +88,7 @@ namespace SmallCode.Web.Controllers
 
             ViewBag.Infoes = infoes;
             ViewBag.Users = userList;
-            ViewBag.HomeInfoes = homeInfoes.OrderByDescending(x=>x.CreateDate).ToList();
+            ViewBag.HomeInfoes = homeInfoes.OrderByDescending(x => x.CreateDate).ToList();
 
 
 
