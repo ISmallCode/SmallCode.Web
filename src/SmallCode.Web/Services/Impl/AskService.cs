@@ -34,7 +34,16 @@ namespace SmallCode.Web.Services.Impl
         /// <returns></returns>
         public List<TopicReply> GetAllRepliesByTopicId(Guid id)
         {
-            return db.TopicReplies.Where(x => x.TopicId == id).ToList();
+            return db.TopicReplies.Where(x => x.TopicId == id).OrderBy(x => x.CreateDate).ToList();
+        }
+
+        /// <summary>
+        /// 获取热门帖子
+        /// </summary>
+        /// <returns></returns>
+        public List<Topic> GetHotTopices()
+        {
+            return db.Topices.OrderByDescending(x => x.ReplyCount).Take(8).ToList();
         }
 
         /// <summary>

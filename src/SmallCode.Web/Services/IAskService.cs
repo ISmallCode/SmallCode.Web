@@ -19,5 +19,7 @@ namespace SmallCode.Web.Services
         void SaveReply(TopicReply reply);
         void UpdateTopic(Topic topic);
         List<TopicReply> GetAllRepliesByTopicId(Guid id);
+
+        List<Topic> GetHotTopices();
     }
 }

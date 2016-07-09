@@ -19,6 +19,7 @@ namespace SmallCode.Web.Controllers
         public IActionResult Index(int pageIndex = 1, int pageSize = 10)
         {
             PagedList<TopicViewModel> list = askService.GetTopicListByPage("", pageIndex, pageSize);
+            ViewBag.HotTopices = askService.GetHotTopices();
             return View(list);
         }
 
@@ -33,6 +34,7 @@ namespace SmallCode.Web.Controllers
             topic.Browses++;
             askService.UpdateTopic(topic);
             ViewBag.Replies = askService.GetAllRepliesByTopicId(id);
+            ViewBag.HotTopices = askService.GetHotTopices();
             return View(new TopicViewModel(topic));
         }
 
@@ -66,16 +68,18 @@ namespace SmallCode.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Reply(Guid TopicId, string ReplyEmail, string Description)
         {
-            TopicReply reply = new TopicReply
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                CreateDate = DateTime.Now,
-                ReplyContent = Description,
-                ReplyEmail = ReplyEmail,
-                TopicId = TopicId,
-                UserId = CurrentUser.Id,
-            };
-
-            askService.SaveReply(reply);
+                TopicReply reply = new TopicReply
+                {
+                    CreateDate = DateTime.Now,
+                    ReplyContent = Description,
+                    ReplyEmail = ReplyEmail,
+                    TopicId = TopicId,
+                    UserId = CurrentUser.Id,
+                };
+                askService.SaveReply(reply);
+            }
             return Redirect("/Ask/Show/" + TopicId);
         }
     }
