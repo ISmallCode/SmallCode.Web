@@ -38,39 +38,39 @@
                     </div>
                     <div class="items panel-body">
                         @{
-                            int i = 1;
+                            int i = 0;
                         }
                         @foreach (var item in ViewBag.Replies)
-                    {
-                        <div class="reply" data-id="23" id="reply1">
-                            <div class="avatar">
-                                <a href="#">
-                                    <img class="media-object avatar-48" src="/img/96.png">
-                                </a>
-                            </div>
-                            <div class="infos">
-                                <div class="reply">
-                                    <div class="info">
-                                        <span class="name">
-                                            <a href="#">@item.User.UserName</a>
-                                        </span> ·
-                                        <span class="time">
-                                            <a class="reply-floor" href="#reply1">#@(i++)</a> · <abbr class="timeago">@item.CreateDate</abbr>
-                                        </span>
-                                        @*<span class="opts pull-right">
-                                                <a title="赞" data-count="0" data-state="" data-type="Reply" data-id="297575" class="likeable " href="#"><i class="fa fa-thumbs-up"></i> <span></span></a>
-                                                <a class="edit fa fa-pencil" data-uid="20859" title="修改回帖" href="/topics/30177/replies/297575/edit"></a>
-                                                <a data-floor="1" data-login="adamshen" title="回复此楼" class="btn-reply fa fa-mail-reply" href="#"></a>
-                                            </span>*@
-                                    </div>
-                                    <div class="markdown">
-                                        <p>@Html.Raw(CommonMarkConverter.Convert(Model.Description))</p>
-                                    </div>
+                        {
+                            <div class="reply" data-id="23" id="reply@(i+1)">
+                                <div class="avatar">
+                                    <a href="#">
+                                        <img class="media-object avatar-48" src="/img/96.png">
+                                    </a>
                                 </div>
+                                <div class="infos">
+                                    <div class="reply">
+                                        <div class="info">
+                                            <span class="name">
+                                                <a href="#">@item.User.UserName</a>
+                                            </span> ·
+                                            <span class="time">
+                                                <a class="reply-floor" href="#reply@(i+1)">#@(++i)</a> · <abbr class="timeago">@item.CreateDate</abbr>
+                                            </span>
+                                            @*<span class="opts pull-right">
+                                                    <a title="赞" data-count="0" data-state="" data-type="Reply" data-id="297575" class="likeable " href="#"><i class="fa fa-thumbs-up"></i> <span></span></a>
+                                                    <a class="edit fa fa-pencil" data-uid="20859" title="修改回帖" href="/topics/30177/replies/297575/edit"></a>
+                                                    <a data-floor="1" data-login="adamshen" title="回复此楼" class="btn-reply fa fa-mail-reply" href="#"></a>
+                                                </span>*@
+                                        </div>
+                                        <div class="markdown">
+                                            <p>@Html.Raw(CommonMarkConverter.Convert(@item.ReplyContent))</p>
+                                        </div>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
                     </div>
 
                 </div>
@@ -102,10 +102,10 @@
         <div class="col-md-3">
             <div class="panel panel-default" style="margin-top:20px;">
                 <div class="panel-heading">
-                    <h3 class="panel-title">.NET Core 跨平台论坛介绍</h3>
+                    <h3 class="panel-title">@Model.NodeName</h3>
                 </div>
                 <div class="panel-body">
-                    .NET Core 开发<br>
+                   @Model.NodeDescription<br>
                 </div>
             </div>
             <div class="panel panel-default topics">
@@ -115,9 +115,9 @@
                 <div class="list-group">
                     @foreach (var item in ViewBag.HotTopices)
                     {
-                    <a class="list-group-item" href="/Ask/Show/@item.Id">
-                        @item.Title
-                    </a>
+                        <a class="list-group-item" href="/Ask/Show/@item.Id">
+                            @item.Title
+                        </a>
                     }
                 </div>
             </div>
