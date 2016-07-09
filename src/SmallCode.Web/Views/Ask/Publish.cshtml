@@ -1,0 +1,58 @@
+﻿@model  SmallCode.Web.Models.Topic
+@{
+    ViewBag.Title = "添加主题";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/styles/plugins/markdown/bootstrap-markdown.min.css" />
+<script type="text/javascript" src="~/scripts/plugins/markdown/markdown.js"></script>
+<script type="text/javascript" src="~/scripts/plugins/markdown/to-markdown.js"></script>
+<script type="text/javascript" src="~/scripts/plugins/markdown/bootstrap-markdown.js"></script>
+<script type="text/javascript" src="~/scripts/plugins/markdown/bootstrap-markdown.zh.js"></script>
+<div class="container">
+    <span>发布新的主题</span>
+    @using (Html.BeginForm("Publish", "Ask", FormMethod.Post, new { id = "myform", Class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row" style="margin-top:100px;height:auto">
+            <div class="form-group">
+                <label for="Title" class="col-md-2 col-sm-2 control-label">标题</label>
+                <div class="col-sm-5 col-md-5">
+                    <input type="text" placeholder="标题" name="title" id="platetitle" class="form-control">
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="PlateForumMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        请选择模块
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="PlateForumMenu">
+                        @foreach (var node in ViewBag.Nodes)
+                        {
+                            <li>
+                                <a href="#" id="@node.Id" class="plate_li">@node.Name</a>
+                            </li>
+                        }
+                    </ul>
+                    <input name="NodeId" id="plateforumId" class="classify" type="hidden">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Text" class="col-sm-2 control-label">需求</label>
+                <div class="col-sm-8">
+                    <textarea name="Description" data-provide="markdown" rows="10" id="txtDescription"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-md-offset-1 col-sm-2 col-md-2">
+                    <input type="submit" class="btn btn-primary" value="发布帖子">
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(".plate_li").click(function () {
+        $("#plateforumId").val($(this).attr("Id"));
+        $("#PlateForumMenu").html($(this).html());
+    });
+</script>

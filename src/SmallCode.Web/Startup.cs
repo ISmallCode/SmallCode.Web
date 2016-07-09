@@ -60,6 +60,7 @@ namespace SmallCode.Web
             services.AddScoped<IMaterialsService, MaterialsService>();
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<IArticleCategoryService, ArticleCategoryService>();
+            services.AddScoped<IAskService, AskService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IEXArticleAuthorService, EXArticleAuthorService>();
             services.AddScoped<IEXArticleService, EXArticleService>();
