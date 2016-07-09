@@ -66,6 +66,11 @@ namespace SmallCode.Web.Models.ViewModels
         /// </summary>
         public string NodeName { set; get; }
 
+        /// <summary>
+        /// 节点描述
+        /// </summary>
+        public string NodeDescription { set; get; }
+
         public TopicViewModel() { }
 
         public TopicViewModel(Topic model)
@@ -84,6 +89,7 @@ namespace SmallCode.Web.Models.ViewModels
             this.CreateDate = model.CreateDate;
             this.UserName = model.User.UserName;
             this.NodeName = model.TopicNode.Name;
+            this.NodeDescription = model.TopicNode.Description;
         }
     }
 }
