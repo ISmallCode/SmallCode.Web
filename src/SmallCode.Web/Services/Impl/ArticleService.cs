@@ -22,7 +22,27 @@ namespace SmallCode.Web.Services.Impl
         public Article GetArticleById(Guid? id)
         {
             // return db.Articles.Where(x => x.Id == id).FirstOrDefault();
-            return db.Articles.Where(x => x.Id == id).Include(x => x.Category).FirstOrDefault();
+            return db.Articles.Where(x => x.Id == id).Include(x=>x.CreateUser).Include(x => x.Category).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 获取热门文章
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public List<Article> GetHotArticles(int count = 8)
+        {
+            return db.Articles.OrderByDescending(x => x.Browses).Take(count).ToList();
+        }
+
+        /// <summary>
+        /// 得到最新的
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public List<Article> GetLastestArticles(int count = 8)
+        {
+            return db.Articles.OrderByDescending(x => x.CreateDate).Take(count).ToList();
         }
 
         public List<Article> GetLatest10()

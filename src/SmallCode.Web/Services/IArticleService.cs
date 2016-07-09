@@ -16,5 +16,8 @@ namespace SmallCode.Web.Services
         void Update(Article article);
         void Remove(Guid id);
         List<Article> GetLatest10();
+
+        List<Article> GetHotArticles(int count = 8);
+        List<Article> GetLastestArticles(int count = 8);
     }
 }

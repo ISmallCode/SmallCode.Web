@@ -1,0 +1,16 @@
+﻿@using SmallCode.Web.Models
+@model List<Article>
+
+<div class="panel panel-default topics">
+    <div class="panel-heading">
+        <h3 class="panel-title">文章排行</h3>
+    </div>
+    <div class="list-group">
+        @foreach (var item in Model)
+            {
+            <a asp-controller="Article" asp-action="Show" asp-route-id="@item.Id" class="list-group-item">
+                @item.Title
+            </a>
+        }
+    </div>
+</div>
