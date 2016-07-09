@@ -22,9 +22,18 @@ namespace SmallCode.Web.Controllers
             return View(list);
         }
 
-        public IActionResult Show()
+        /// <summary>
+        /// 展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult Show(Guid id)
         {
-            return View();
+            Topic topic = askService.GetTopicById(id);
+            topic.Browses++;
+            askService.UpdateTopic(topic);
+            ViewBag.Replies = askService.GetAllRepliesByTopicId(id);
+            return View(new TopicViewModel(topic));
         }
 
         [HttpGet]
@@ -45,6 +54,29 @@ namespace SmallCode.Web.Controllers
                 return Redirect("/Ask/Index");
             }
             return View();
+        }
+
+        /// <summary>
+        /// 回复
+        /// </summary>
+        /// <param name="TopicId"></param>
+        /// <param name="ReplyEmail"></param>
+        /// <param name="Description"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        public IActionResult Reply(Guid TopicId, string ReplyEmail, string Description)
+        {
+            TopicReply reply = new TopicReply
+            {
+                CreateDate = DateTime.Now,
+                ReplyContent = Description,
+                ReplyEmail = ReplyEmail,
+                TopicId = TopicId,
+                UserId = CurrentUser.Id,
+            };
+
+            askService.SaveReply(reply);
+            return Redirect("/Ask/Show/" + TopicId);
         }
     }
 }

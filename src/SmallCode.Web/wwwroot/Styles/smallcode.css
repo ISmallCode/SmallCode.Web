@@ -28,8 +28,14 @@
     margin-top: 100px;
 }
 
+.left-0-1 {
+    padding-left: 10px;
+}
 
 
+.right-0-1 {
+   padding-right: 10px;
+}
 
 #footer {
     color: #888;
@@ -68,6 +74,17 @@
 .text-muted {
     color: #777;
 }
+
+.avatar {
+    float: left;
+}
+
+.avatar-48 {
+    height: 48px;
+    width: 48px;
+    border-radius: 120px;
+}
+
 
 .widget {
     position: relative;
@@ -286,3 +303,60 @@
         .blog-widget .tag-cloud a.active {
             color: white;
         }
+
+
+.topic {
+    min-height: 68px;
+    border-bottom: 1px solid #F0F0F0;
+    padding: 10px 15px;
+}
+
+    .topic .count {
+        width: 100px;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+        .topic .count a {
+            min-width: 32px;
+            line-height: 11px;
+            padding: 3px 8px;
+            background-color: #337ab7;
+            color: #fff;
+            border-radius: 60px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+
+
+.title {
+    font-size: 18px;
+}
+
+    .title a {
+        line-height: 28px;
+    }
+
+.info {
+    color: #ABA8A6;
+}
+
+
+
+.panel-default > .panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+.topic-detail {
+    margin-bottom: 15px;
+}
+.panel-default {
+    border-color: #ddd;
+}
+
+.topic-detail h1 {
+    font-size: 24px;
+}

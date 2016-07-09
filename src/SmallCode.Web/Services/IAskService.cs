@@ -12,8 +12,12 @@ namespace SmallCode.Web.Services
     {
         PagedList<TopicViewModel> GetTopicListByPage(string title, int pageIndex, int pageSize);
 
-         void SaveTopic(Topic model);
+        void SaveTopic(Topic model);
 
         List<TopicNode> GetAllNodes();
+        Topic GetTopicById(Guid id);
+        void SaveReply(TopicReply reply);
+        void UpdateTopic(Topic topic);
+        List<TopicReply> GetAllRepliesByTopicId(Guid id);
     }
 }

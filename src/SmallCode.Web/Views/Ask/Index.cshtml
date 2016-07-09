@@ -8,30 +8,31 @@
 <link href="~/styles/page.css" rel="stylesheet" />
 <div class="container top-0-8">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 panel-body widget">
             @foreach (var item in Model.PageListData)
             {
-                <article class="blog-post">
-                    <div class="post-head">
-                        <h1 class="post-title"><a href="/Ask/Show/@item.Id" target="_blank">@item.Title</a></h1>
-                        <div class="post-meta">
-                            <span class="author">作者：<a href="/User/Show/1">@item.UserName</a></span> •
-                            <time class="post-date" datetime="@item.CreateDate" title="@item.CreateDate">@item.CreateDate</time> •
-                            <span class="browser">访问量：@item.Browses</span>
+                <div class="topic ">
+                    <div class="avatar right-0-1">
+                        <a href="#"><img class="avatar-48" src="/img/96.png" alt="96"></a>
+                    </div>
+                    <div class="media-body">
+                        <div class="title">
+                            <a href="/Ask/Show/@item.Id">
+                                @item.Title
+                            </a>
+                        </div>
+                        <div class="info">
+                            @item.NodeName 【<label>@item.UserName</label>】发布于 @item.CreateDate
+                            @if (item.ReplyCount > 0)
+                            {
+                                <label>最后回复 @item.LastReplyDate</label>
+                            }
                         </div>
                     </div>
-                    <div class="post-content">
-                        @item.Description
+                    <div class="count media-right">
+                        <a class="state-false" href="/Topic/1290#reply1">@item.ReplyCount</a>
                     </div>
-                    <footer class="post-footer clearfix">
-                        <div class="pull-left tag-list">
-                            <i class="glyphicon glyphicon-folder-open"></i>
-                            <a href="?Category=z-Coding&amp;Date=">@item.LastReplyUserName</a>
-                        </div>
-                        <div class="pull-right share">
-                        </div>
-                    </footer>
-                </article>
+                </div>
             }
             @Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { pageIndex }))
         </div>

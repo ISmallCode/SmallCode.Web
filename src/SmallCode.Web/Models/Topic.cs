@@ -10,7 +10,7 @@ namespace SmallCode.Web.Models
     {
         public Guid Id { get; set; }
 
-        [ForeignKey("Node")]
+        [ForeignKey("TopicNode")]
         public Guid NodeId { get; set; }
 
         [ForeignKey("User")]
@@ -58,6 +58,6 @@ namespace SmallCode.Web.Models
 
         public virtual User User { set; get; }
 
-        public virtual TopicNode Node { set; get; }
+        public virtual TopicNode TopicNode { set; get; }
     }
 }
