@@ -29,6 +29,11 @@ namespace SmallCode.Web.Services.Impl
             return db.Users.OrderByDescending(x => x.CreatedDate).Take(10).ToList();
         }
 
+        public User GetUserById(Guid id)
+        {
+            return db.Users.FirstOrDefault(x => x.Id == id);
+        }
+
         /// <summary>
         /// 分页查询
         /// </summary>

@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using SmallCode.Web.Services;
 using SmallCode.Web.Filters;
 using SmallCode.Web.DataModels;
+using SmallCode.Web.Models.ViewModels;
+using SmallCode.Pager;
 
 namespace SmallCode.Web.Controllers
 {
@@ -16,6 +18,9 @@ namespace SmallCode.Web.Controllers
     {
         [Inject]
         public IUserService userService { set; get; }
+
+        [Inject]
+        public IAskService askService { set; get; }
 
         public IActionResult Index()
         {
@@ -119,6 +124,19 @@ namespace SmallCode.Web.Controllers
             model.Status = "ok";
             model.Message = "注册成功";
             return Json(model);
+        }
+
+        [HttpGet]
+        public IActionResult Show(int pageIndex = 1, int pageSize = 10)
+        {
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Home/Error");
+            }
+            User user = CurrentUser;
+            ViewBag.User = user;
+            PagedList<TopicViewModel> list = askService.GetUserTopicListByPage("", pageIndex, pageSize,CurrentUser.Id);
+            return View(list);
         }
     }
 }

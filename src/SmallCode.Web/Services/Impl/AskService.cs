@@ -101,6 +101,52 @@ namespace SmallCode.Web.Services.Impl
         }
 
         /// <summary>
+        /// 得到用户的主题
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public PagedList<TopicViewModel> GetUserTopicListByPage(string title, int pageIndex, int pageSize,Guid UserId)
+        {
+            IQueryable<TopicViewModel> query =
+               from a in db.Topices
+               join n in db.TopicNodes on a.NodeId equals n.Id
+               join u in db.Users on a.UserId equals u.Id
+               join lu in db.Users on a.LastReplyUserId equals lu.Id into userTemp
+               from ur in userTemp.DefaultIfEmpty()
+               where a.UserId==UserId
+               select new TopicViewModel
+               {
+                   Browses = a.Browses,
+                   Title = a.Title,
+                   Id = a.Id,
+                   CreateDate = a.CreateDate,
+                   Description = a.Description,
+                   UserId = a.UserId,
+                   Good = a.Good,
+                   NodeId = a.NodeId,
+                   LastReplyDate = a.LastReplyDate,
+                   LastReplyUserId = a.LastReplyUserId,
+                   LastReplyUserName = ur == null ? null : ur.UserName,
+                   UserName = u.UserName,
+                   NodeName = n.Name,
+                   ReplyCount = a.ReplyCount,
+                   Top = a.Top
+               };
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                query = query.Where(x => x.Title.Contains(title));
+            }
+
+            query = query.OrderByDescending(x => x.CreateDate);
+
+            return query.ToPagedList(pageIndex, pageSize);
+        }
+
+        /// <summary>
         /// 保存主题
         /// </summary>
         /// <param name="reply"></param>
