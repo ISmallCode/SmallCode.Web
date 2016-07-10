@@ -99,9 +99,16 @@ namespace SmallCode.Web.Services.Impl
         /// <returns></returns>
         public Materials GetMaterialsById(Guid? id)
         {
-            return db.Materialses.Where(x => x.Id == id).Include(x=>x.CreateUser).FirstOrDefault();
+            return db.Materialses.Where(x => x.Id == id).Include(x => x.CreateUser).FirstOrDefault();
         }
 
+        /// <summary>
+        ///  分页查找列表
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         public PagedList<MaterialsCategoryViewModel> GetCategoryListByPage(string title, int pageIndex, int pageSize)
         {
 

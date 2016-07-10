@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmallCode.Web.Services;
 using SmallCode.Web.Models.ViewModels;
 using SmallCode.Pager;
+using SmallCode.Web.Filters;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,6 +14,7 @@ namespace SmallCode.Web.Areas.Admin.Controllers
 {
     public class EXArticleTempController : BaseController
     {
+        [Inject]
         public IEXArticleTempService exArticleTempService { set; get; }
 
         [HttpGet]
