@@ -21,5 +21,6 @@ namespace SmallCode.Web.Services
         List<TopicReply> GetAllRepliesByTopicId(Guid id);
 
         List<Topic> GetHotTopices();
+        PagedList<TopicViewModel> GetUserTopicListByPage(string v, int pageIndex, int pageSize,Guid Id);
     }
 }
