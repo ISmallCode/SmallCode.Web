@@ -146,10 +146,10 @@
         // Use Ajax to submit form data
         $.post("/Account/Register", $form.serialize(), function (data) {
             console.log(data)
-            if (data.Status == "ok") {
+            if (data.status == "ok") {
                 window.location.href = "/Home/Index";
             }
-            else if (data.Status == "error") {
+            else if (data.status == "error") {
                 //$("#warning").html(data.Message);
                 alert(data.Message);
             }
