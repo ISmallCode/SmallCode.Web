@@ -47,11 +47,11 @@
             {
                 <article class="excerpt excerpt-none excerpt-5 article53">
                     <header>
-                        <a class="cat label label-important" target="_blank" href="" data-original-title="" title="">@item.Category<i class="label-arrow"></i></a>
+                        <a class="cat label label-important" target="_blank" href="" data-original-title="" title=""><i class="glyphicon glyphicon-tags"></i>@item.Category</a>
                         <h2><a href="@item.Url" target="_blank" title="@item.Title">@item.Title</a></h2>
                     </header>
                     <div class="text-muted time">
-                        <span class="post-time nmpost"><i class="fa fa-clock-o"></i>  发布于 @item.CreateDate</span>
+                        <span class="post-time nmpost"><i class="glyphicon glyphicon-time"></i>  发布于 @item.CreateDate</span>
                     </div>
                     @if (!string.IsNullOrEmpty(item.ImageUrl))
                     {
@@ -63,7 +63,7 @@
                     }
                     <span class="note">@item.Description</span>
                     <div class="text-muted views">
-                        <span class="post-views"><i class="fa fa-eye"></i> 阅读(@item.Browses)</span>
+                        <span class="post-views"><i class="glyphicon glyphicon-book"></i> 阅读(@item.Browses)</span>
                         @*<a href="javascript:;" class="post-like sf-praise-sdk pull-right" sfa="click" data-postid="53" data-value="1">
                             <i class="fa  fa-thumbs-o-up"></i>赞一个  (<span class="sf-praise-sdk" sfa="num" data-value="1" data-postid="53">0</span>)</a>*@
                         <span class="post-comments"><i class="fa fa-comments"></i></span>
@@ -92,10 +92,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-12">
-                            <ul class="userData">
+                            <ul class="userData list-group">
                                 @foreach (var item in ViewBag.Users)
                                 {
-                                <li class="news-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
+                                <li class="list-group-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
                                 }
                             </ul>
                         </div>
@@ -133,6 +133,6 @@
                 //console.log(this);
             }
         });
-
+        $(".userData").css("height", '83px');
     });
 </script>
