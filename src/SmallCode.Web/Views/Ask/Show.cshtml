@@ -1,0 +1,137 @@
+﻿@model SmallCode.Web.Models.ViewModels.TopicViewModel
+@using CommonMark
+<link rel="stylesheet" type="text/css" href="~/styles/plugins/markdown/bootstrap-markdown.min.css" />
+<script type="text/javascript" src="~/scripts/plugins/markdown/markdown.js"></script>
+<script type="text/javascript" src="~/scripts/plugins/markdown/to-markdown.js"></script>
+<script type="text/javascript" src="~/scripts/plugins/markdown/bootstrap-markdown.js"></script>
+<script type="text/javascript" src="~/scripts/plugins/markdown/bootstrap-markdown.zh.js"></script>
+<div class="container top-0-6">
+    <div class="row">
+        <div class="col-md-9" style="margin-top:20px;">
+            <div class="topic-detail panel panel-default">
+                <div class="panel-heading media clearfix">
+                    <div class="media-body">
+                        <h1 class="media-heading">@Model.Title</h1>
+                        <div class="info">
+                            <a class="node" href="/topic/node25">@Model.NodeName</a>
+                            ·
+                            <a href="#">@Model.UserName</a>
+                            ·
+                            于 <abbr class="timeago">@Model.CreateDate</abbr>发布
+                            ·
+                            @Model.Browses 次阅读
+                        </div>
+                    </div>
+                    <div class="media-right">
+                        <a href="#"><img class="media-object avatar-48" src="/img/96.png"></a>
+                    </div>
+                </div>
+                <div class="panel-body markdown">
+                    <p id="content">@Html.Raw(CommonMarkConverter.Convert(Model.Description))</p>
+                </div>
+            </div>
+            @if (Model.ReplyCount > 0)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p class="panel-title">回复：</p>
+                    </div>
+                    <div class="items panel-body">
+                        @{
+                            int i = 0;
+                        }
+                        @foreach (var item in ViewBag.Replies)
+                        {
+                            <div class="reply" data-id="23" id="reply@(i+1)">
+                                <div class="avatar">
+                                    <a href="#">
+                                        <img class="media-object avatar-48" src="/img/96.png">
+                                    </a>
+                                </div>
+                                <div class="infos">
+                                    <div class="reply">
+                                        <div class="info">
+                                            <span class="name">
+                                                <a href="#">@item.User.UserName</a>
+                                            </span> ·
+                                            <span class="time">
+                                                <a class="reply-floor" href="#reply@(i+1)">#@(++i)</a> · <abbr class="timeago">@item.CreateDate</abbr>
+                                            </span>
+                                            @*<span class="opts pull-right">
+                                                    <a title="赞" data-count="0" data-state="" data-type="Reply" data-id="297575" class="likeable " href="#"><i class="fa fa-thumbs-up"></i> <span></span></a>
+                                                    <a class="edit fa fa-pencil" data-uid="20859" title="修改回帖" href="/topics/30177/replies/297575/edit"></a>
+                                                    <a data-floor="1" data-login="adamshen" title="回复此楼" class="btn-reply fa fa-mail-reply" href="#"></a>
+                                                </span>*@
+                                        </div>
+                                        <div class="markdown">
+                                            <p>@Html.Raw(CommonMarkConverter.Convert(@item.ReplyContent))</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+                            }
+
+            <div class="panel panel-default" style="padding:20px;">
+                <form class="form-horizontal" method="post" action="/Ask/Reply">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="TopicId" value="@Model.Id">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">内容</label>
+                        <div class="col-sm-10">
+                            <div class="md-editor">
+                                <textarea name="Description" data-provide="markdown" rows="10" id="txtDescription"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">回复</button>
+                            </div>
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default" style="margin-top:20px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Model.NodeName</h3>
+                </div>
+                <div class="panel-body">
+                   @Model.NodeDescription<br>
+                </div>
+            </div>
+            <div class="panel panel-default topics">
+                <div class="panel-heading">
+                    <h3 class="panel-title">主题排行</h3>
+                </div>
+                <div class="list-group">
+                    @foreach (var item in ViewBag.HotTopices)
+                    {
+                        <a class="list-group-item" href="/Ask/Show/@item.Id">
+                            @item.Title
+                        </a>
+                    }
+                </div>
+            </div>
+
+            @*<div class="panel panel-default topics">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">统计信息</h3>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">社区会员: 10 人</li>
+                        <li class="list-group-item">帖子数: 25 个</li>
+                        <li class="list-group-item">回帖数: 23 条</li>
+                    </ul>
+                </div>*@
+        </div>
+    </div>
+</div>

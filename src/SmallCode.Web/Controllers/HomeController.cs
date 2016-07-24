@@ -83,7 +83,7 @@ namespace SmallCode.Web.Controllers
                 model.Title = item.UserName;
                 model.Id = item.Id;
                 model.CreateDate = item.CreatedDate;
-                model.Url = "/User/Show/" + item.Id;
+                model.Url = "/Account/Show/" + item.UserName;
             }
 
             ViewBag.Infoes = infoes;

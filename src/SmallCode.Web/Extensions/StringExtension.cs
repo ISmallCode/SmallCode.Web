@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
 namespace SmallCode.Web.Extensions
 {
     public static class StringExtension
@@ -36,6 +32,21 @@ namespace SmallCode.Web.Extensions
             }
         }
 
+        /// <summary>
+        /// 去除字符串的html标签
+        /// </summary>
+        /// <param name="Htmlstring">字符串</param>
+        /// <returns></returns>
+        public static string NoHTML(string Htmlstring)
+        {
+            //移除  javascript code.
+            Htmlstring = Regex.Replace(Htmlstring, @"<script[\d\D]*?>[\d\D]*?</script>", String.Empty);
+
+            //移除html tag.
+            Htmlstring = Regex.Replace(Htmlstring, @"<[^>]*>", String.Empty);
+
+            return Htmlstring;
+        }
 
         /// <summary>
         /// 截取字符串
@@ -46,7 +57,8 @@ namespace SmallCode.Web.Extensions
         /// <returns></returns>
         public static string SubString(this string s, int l, string endStr)
         {
-            string temp = s.Substring(0, (s.Length < l + 1) ? s.Length : l + 1);
+            string str = NoHTML(s);
+            string temp = str.Substring(0, (str.Length < l + 1) ? str.Length : l + 1);
             byte[] encodedBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(temp);
 
             string outputStr = "";
@@ -97,5 +109,36 @@ namespace SmallCode.Web.Extensions
                 sUrlList[i++] = match.Groups["imgUrl"].Value;
             return sUrlList;
         }
+
+        #region    移除HTML标签   
+        ///   <summary>   
+        ///    移除HTML标签   
+        ///   </summary>   
+        ///   <param    name="HTMLStr">HTMLStr</param>   
+        public static string ParseTags(string HTMLStr)
+        {
+            return System.Text.RegularExpressions.Regex.Replace(HTMLStr, "<[^>]*>", "");
+        }
+
+        #endregion
+
+        #region    取出文本中的图片地址   
+        ///   <summary>   
+        ///    取出文本中的图片地址   
+        ///   </summary>   
+        ///   <param    name="HTMLStr">HTMLStr</param>   
+        public static string GetImgUrl(string HTMLStr)
+        {
+            string str = string.Empty;
+            string sPattern = @"^<img\s+[^>]*>";
+            Regex r = new Regex(@"<img\s+[^>]*\s*src\s*=\s*([']?)(?<url>\S+)'?[^>]*>",
+                    RegexOptions.Compiled);
+            Match m = r.Match(HTMLStr.ToLower());
+            if (m.Success)
+                str = m.Result("${url}");
+            return str;
+        }
+
+        #endregion
     }
 }

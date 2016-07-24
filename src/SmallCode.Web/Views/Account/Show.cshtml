@@ -1,9 +1,11 @@
 ﻿@using SmallCode.Web.Models.ViewModels;
+@using SmallCode.Web.Models;
 @model SmallCode.Pager.PagedList<TopicViewModel>
 @using SmallCode.Pager;
 
 @{
-            ViewBag.Title = "博客";
+    ViewBag.Title = "博客";
+    User user = ViewBag.User as User;
 }
 <link href="~/styles/page.css" rel="stylesheet" />
 <div class="container top-0-8">
@@ -38,9 +40,22 @@
         </div>
         <aside class="col-md-3">
             <div class="blog-widget">
-                <a href="/Ask/Publish" class="btn btn-primary"><strong>我要发布</strong></a>
+                <a href="/Ask/Publish" class="btn btn-primary"><strong>我要发布问题</strong></a>
             </div>
-            @Html.Partial("_AskSidebarPartial")
+
+            <div class="panel panel-default topics">
+                <div class="panel-heading">
+                    <h3 class="panel-title">用户信息</h3>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        @user.UserName
+                    </div>
+                    <div class="list-group-item">
+                        @user.Role
+                    </div>
+                </div>
+            </div>
         </aside>
     </div>
 </div>
