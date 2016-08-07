@@ -361,3 +361,7 @@
 .topic-detail h1 {
     font-size: 24px;
 }
+.userData
+{
+    min-height:83px;
+}

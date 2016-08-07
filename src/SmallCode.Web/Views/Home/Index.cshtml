@@ -47,7 +47,7 @@
             {
                 <article class="excerpt excerpt-none excerpt-5 article53">
                     <header>
-                        <a class="cat label label-important" target="_blank" href="" data-original-title="" title=""><i class="glyphicon glyphicon-tags"></i>@item.Category</a>
+                        <a class="cat label label-important" data-original-title="" title=""><i class="glyphicon glyphicon-tags"></i>@item.Category</a>
                         <h2><a href="@item.Url" target="_blank" title="@item.Title">@item.Title</a></h2>
                     </header>
                     <div class="text-muted time">
@@ -72,34 +72,23 @@
             }
         </div>
         <div class="col-md-4">
-            <div class="widget">
-                <h3>资料最新动态</h3>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <ul class="infoData">
-                                @foreach (var item in ViewBag.Infoes)
-                                {
-                                    <li class="news-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">资料最新动态</div>
+                <ul class="infoData">
+                    @foreach (var item in ViewBag.Infoes)
+                    {
+                        <li class="news-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
+                    }
+                </ul>
             </div>
-            <div class="widget">
-                <h3>用户最新动态</h3>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <ul class="userData list-group">
-                                @foreach (var item in ViewBag.Users)
-                                {
-                                <li class="list-group-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">用户最新动态</div>
+                    <ul class="userData list-group">
+                        @foreach (var item in ViewBag.Users)
+                        {
+                            <li class="list-group-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
+                        }
+                    </ul>
                 </div>
             </div>
         </div>
