@@ -31,6 +31,7 @@ namespace SmallCode.Web.Controllers
             materials.Browses++;
             materialsService.Update(materials);
             MaterialsViewModel model = new MaterialsViewModel(materials);
+            model.Id = id;
             return View(model);
         }
 

@@ -75,10 +75,10 @@
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">资料最新动态</div>
-                <ul class="infoData">
+                <ul class="infoData list-group">
                     @foreach (var item in ViewBag.Infoes)
                     {
-                        <li class="news-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
+                        <li class="list-group-item news-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
                     }
                 </ul>
             </div>
@@ -87,10 +87,9 @@
                     <ul class="userData list-group">
                         @foreach (var item in ViewBag.Users)
                         {
-                            <li class="list-group-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
+                            <li class="list-group-item news-item">@item.Title <a href="@item.Url">查看全部</a>@item.CreateDate</li>
                         }
                     </ul>
-                </div>
             </div>
         </div>
     </div>
@@ -107,10 +106,9 @@
             direction: 'down',
             newsTickerInterval: 2500,
             onToDo: function () {
-                //console.log(this);
+                
             }
         });
-
 
         $(".userData").bootstrapNews({
             newsPerPage: 4,
@@ -120,9 +118,8 @@
             direction: 'down',
             newsTickerInterval: 2500,
             onToDo: function () {
-                //console.log(this);
+               
             }
         });
-        $(".userData").css("height", '83px');
     });
 </script>

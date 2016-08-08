@@ -37,6 +37,7 @@ namespace SmallCode.Web.Controllers
             article.Browses++;
             articleService.Update(article);
             ArticleViewModel _article = new ArticleViewModel(article);
+            _article.Id = id;
             return View(_article);
         }
     }

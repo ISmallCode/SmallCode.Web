@@ -66,9 +66,10 @@
 }
 
 .news-item {
-    padding: 4px 4px;
+    padding: 3px 10px;
     margin: 0px;
     border-bottom: 1px dotted #555;
+    font-size: 15px;
 }
 
 .text-muted {
@@ -360,8 +361,4 @@
 
 .topic-detail h1 {
     font-size: 24px;
-}
-.userData
-{
-    min-height:83px;
 }
