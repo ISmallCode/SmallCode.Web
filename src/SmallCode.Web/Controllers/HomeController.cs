@@ -91,7 +91,6 @@ namespace SmallCode.Web.Controllers
             ViewBag.HomeInfoes = homeInfoes.OrderByDescending(x => x.CreateDate).ToList();
 
 
-
             return View();
         }
 

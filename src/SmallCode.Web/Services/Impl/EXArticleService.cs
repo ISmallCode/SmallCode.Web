@@ -27,11 +27,10 @@ namespace SmallCode.Web.Services.Impl
         /// <returns></returns>
         public PagedList<EXArticleViewModel> GetListByPage(string title, int pageIndex, int pageSize)
         {
-
             IQueryable<EXArticleViewModel> query =
                 from ex in db.EXArticles
                 join u in db.Users on ex.CreateBy equals u.Id
-                join c in db.Categories on ex.Id equals c.Id
+                join c in db.Categories on ex.CategoryId equals c.Id
                 select new EXArticleViewModel
                 {
                     AuthorId = ex.AuthorId,

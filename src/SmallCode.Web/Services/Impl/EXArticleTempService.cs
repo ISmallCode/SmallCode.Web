@@ -1,4 +1,5 @@
 ﻿using SmallCode.Pager;
+using SmallCode.Web.Extensions;
 using SmallCode.Web.Models;
 using SmallCode.Web.Models.ViewModels;
 using System;
@@ -36,7 +37,7 @@ namespace SmallCode.Web.Services.Impl
                     AuthorId = ex.AuthorId,
                     Category = c.Title,
                     Title = ex.Title,
-                    CategoryId = ex.CategoryId,
+                    CategoryId = c.Id,
                     CheckCategory = ex.CheckCategory,
                     CreateBy = ex.CreateBy,
                     CreateDate = ex.CreateDate,
@@ -51,7 +52,8 @@ namespace SmallCode.Web.Services.Impl
                     ReplyCount = ex.ReplyCount,
                     Source = ex.Source,
                     Status = ex.Status,
-                    URL = ex.URL
+                    URL = ex.URL,
+                    Summary = ex.Description.SubString(200, "......")
                 };
 
             if (!string.IsNullOrEmpty(title))
@@ -59,6 +61,15 @@ namespace SmallCode.Web.Services.Impl
                 query = query.Where(x => x.Title.Contains(title));
             }
             return query.ToPagedList(pageIndex, pageSize);
+        }
+        /// <summary>
+        /// 根据Id获取
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public EXArticleTemp GetArticleTempById(Guid id)
+        {
+            return db.EXArticleTemps.FirstOrDefault(x => x.Id == id);
         }
     }
 }

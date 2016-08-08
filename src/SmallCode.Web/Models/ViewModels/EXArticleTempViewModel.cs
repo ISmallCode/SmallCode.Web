@@ -74,6 +74,9 @@ namespace SmallCode.Web.Models.ViewModels
         /// </summary>
         public int CheckCategory { set; get; }
 
+        /// </summary>
+        public string Summary { set; get; }
+
         /// <summary>
         /// 状态
         /// </summary>
