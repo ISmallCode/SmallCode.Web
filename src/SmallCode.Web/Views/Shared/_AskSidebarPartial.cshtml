@@ -7,74 +7,94 @@
         .NET Core 开发<br />
         VS Code 或者 VS2015 Update 3+VS2015Tools.Preview2<br />
         更多详细：<a href="http://dot.net" target="_blank">dot.net</a><br />
-        <h2>论坛系统介绍：</h2>
-        系统开发：<br />
-        @*ASP.NET Core + EF Core Postgresql + Bootstrap <br />
-        运行环境：<br />
-        Ubuntu 14.04 + Kestrel <br /><br />
-        博客介绍：
-        <a href="http://www.cnblogs.com/linezero/" target="_blank">
-            LineZero's Blog
-        </a><br />
-        GitHub：
-        <a href="https://github.com/linezero/NETCoreBBS" target="_blank">
-            NETCoreBBS
-        </a><br />*@
-        服务器时间：<span class="date-time"></span>
     </div>
 </div>
-<script>
-    setInterval("show_cur_times()", 100);
-    function show_cur_times()
-    {
-        var date_time = new Date();
-        //年
-        var year = date_time.getFullYear();
-        //判断小于10，前面补0
-        if (year < 10) {
-            year = "0" + year;
-        }
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">论坛系统介绍</h3>
+    </div>
+   <table class="table">
+              @*<tr>
+    <td>系统开发：</td>
+    <td>
+     ASP.NET Core + EF Core Postgresql + Bootstrap
+            </td>
+        </tr>
+       <tr>
+           <td>运行环境</td>
+           <td> Ubuntu 14.04 + Kestrel </td>
+       </tr>
+        <tr>
+           <td>博客介绍</td>
+           <td> <a href="http://www.cnblogs.com/linezero/" target="_blank">
+                 LineZero's Blog
+             </a></td>
+       </tr>
+      <tr>
+           <td>GitHub</td>
+           <td>  
+                  <a href="https://github.com/linezero/NETCoreBBS" target="_blank">
+                 NETCoreBBS
+             </a>
+                  </td>
+       </tr>*@
+       <tr>
+           <td>服务器时间</td>
+           <td><span class="date-time"></span></td>
+       </tr>
+    </table>
+    </div>
+    <script>
+            setInterval("show_cur_times()", 100);
+            function show_cur_times() {
+                var date_time = new Date();
+                //年
+                var year = date_time.getFullYear();
+                //判断小于10，前面补0
+                if (year < 10) {
+                    year = "0" + year;
+                }
 
-        //月
-        var month = date_time.getMonth() + 1;
-        //判断小于10，前面补0
-        if (month < 10) {
-            month = "0" + month;
-        }
+                //月
+                var month = date_time.getMonth() + 1;
+                //判断小于10，前面补0
+                if (month < 10) {
+                    month = "0" + month;
+                }
 
-        //日
-        var day = date_time.getDate();
-        //判断小于10，前面补0
-        if (day < 10) {
-            day = "0" + day;
-        }
+                //日
+                var day = date_time.getDate();
+                //判断小于10，前面补0
+                if (day < 10) {
+                    day = "0" + day;
+                }
 
-        //时
-        var hours = date_time.getHours();
-        //判断小于10，前面补0
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
+                //时
+                var hours = date_time.getHours();
+                //判断小于10，前面补0
+                if (hours < 10) {
+                    hours = "0" + hours;
+                }
 
-        //分
-        var minutes = date_time.getMinutes();
-        //判断小于10，前面补0
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
+                //分
+                var minutes = date_time.getMinutes();
+                //判断小于10，前面补0
+                if (minutes < 10) {
+                    minutes = "0" + minutes;
+                }
 
-        //秒
-        var seconds = date_time.getSeconds();
-        //判断小于10，前面补0
-        if (seconds < 10) {
-            seconds = "0" + seconds;
-        }
+                //秒
+                var seconds = date_time.getSeconds();
+                //判断小于10，前面补0
+                if (seconds < 10) {
+                    seconds = "0" + seconds;
+                }
 
-        //拼接年月日时分秒
-        var date_str = year + "-" + month + "-" + day + "  " + hours + ":" + minutes + ":" + seconds + " ";
-        $(".date-time").html(date_str);
-    } 
-    
-</script>
-@(await Component.InvokeAsync<TopicRankList>())
-@(await Component.InvokeAsync<TopicStatistics>())
+                //拼接年月日时分秒
+                var date_str = year + "-" + month + "-" + day + "  " + hours + ":" + minutes + ":" + seconds + " ";
+                $(".date-time").html(date_str);
+            }
+    </script>
+</div>
+        @(await Component.InvokeAsync<TopicRankList>())
+        @(await Component.InvokeAsync<TopicStatistics>())
