@@ -7,14 +7,14 @@
 }
 <link href="~/styles/page.css" rel="stylesheet" />
 <div class="container top-0-8">
-    <div class="row">
-        <div class="col-md-9 panel-body widget">
+    <main class="row">
+        <section class="col-md-9 panel-body widget">
             @foreach (var item in Model.PageListData)
             {
-                <div class="topic ">
-                    <div class="avatar right-0-1">
+                <article class="topic ">
+                    < class="avatar right-0-1">
                         <a href="#"><img class="avatar-48" src="/img/96.png" alt="96"></a>
-                    </div>
+                    </>
                     <div class="media-body">
                         <div class="title">
                             <a href="/Ask/Show/@item.Id">
@@ -32,15 +32,15 @@
                     <div class="count media-right">
                         <a class="state-false" href="/Topic/1290#reply1">@item.ReplyCount</a>
                     </div>
-                </div>
+                </article>
             }
             @Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { pageIndex }))
-        </div>
+        </section>
         <aside class="col-md-3">
             <div class="blog-widget">
                 <a href="/Ask/Publish" class="btn btn-primary"><strong>我要发布</strong></a>
             </div>
             @Html.Partial("_AskSidebarPartial")
         </aside>
-    </div>
+    </main>
 </div>

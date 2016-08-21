@@ -8,8 +8,8 @@
 }
 <link href="~/styles/page.css" rel="stylesheet" />
 <div class="container top-0-8">
-    <div class="row">
-        <div class="col-md-9">
+    <main class="row">
+        <section class="col-md-9">
             @foreach (var item in Model.PageListData)
             {
                 <article class="excerpt excerpt-none excerpt-5 article53">
@@ -30,9 +30,9 @@
                 </article>
             }
             @Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { pageIndex }))
-        </div>
+        </section>
         <aside class="col-md-3">
             @Html.Partial("_MaterialsSidebarPartial")
         </aside>
-    </div>
+    </main>
 </div>
